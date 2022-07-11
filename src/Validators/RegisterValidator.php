@@ -24,7 +24,7 @@ class RegisterValidator
         $item = Model::where('email', trim($data['email']))->first();
 
         if ( $item ) {
-            return 'An user with this email already exists.';
+            return 'A user with this email already exists.';
         }
 
         return true;
