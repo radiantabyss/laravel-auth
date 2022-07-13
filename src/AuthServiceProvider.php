@@ -62,6 +62,7 @@ class AuthServiceProvider extends ServiceProvider
         $router = $this->app['router'];
         $router->aliasMiddleware('RA\Auth\Auth', \RA\Auth\Http\Middleware\AuthMiddleware::class);
         $router->aliasMiddleware('RA\Auth\NoAuth', \RA\Auth\Http\Middleware\NoAuthMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\SetUser', \RA\Auth\Http\Middleware\SetUserMiddleware::class);
     }
 
     private function enablePublishing() {
