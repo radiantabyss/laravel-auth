@@ -3,7 +3,7 @@ namespace RA\Auth\Models;
 
 use Illuminate\Database\Eloquent\Model as LaravelModel;
 
-class BaseModel extends LaravelModel
+class Model extends LaravelModel
 {
     protected $guarded = [
         'id', 'created_at', 'updated_at',
