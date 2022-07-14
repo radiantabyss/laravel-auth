@@ -1,7 +1,6 @@
 <?php
 namespace RA\Auth\Validators;
 
-
 class ConfirmPhoneValidator
 {
     public static function run($data) {

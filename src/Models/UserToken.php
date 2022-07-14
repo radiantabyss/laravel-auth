@@ -1,14 +1,7 @@
 <?php
 namespace RA\Auth\Models;
 
-class UserToken extends BaseModel
+class UserToken extends Model
 {
-    protected $guarded = [
-        'id', 'created_at', 'updated_at',
-    ];
-
-    public function __construct($attributes = []) {
-        parent::__construct($attributes);
-        $this->table = env('RA_AUTH_TABLE_NAME').'_token';
-    }
+    protected $table = 'user_token';
 }

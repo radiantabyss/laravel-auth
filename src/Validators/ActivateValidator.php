@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Validators;
 
-use RA\Auth\Models\User as Model;
+use RA\Auth\Services\ClassName;
 
 class ActivateValidator
 {
@@ -19,7 +19,7 @@ class ActivateValidator
             return $validator->messages();
         }
 
-        $item = Model::where('id', $data['id'])->where('activation_code', $data['code'])->first();
+        $item = ClassName::Model()::where('id', $data['id'])->where('activation_code', $data['code'])->first();
 
         if ( !$item ) {
             return 'User has been activated or doesn\'t exist.';

@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Validators;
 
-use RA\Auth\Models\User as Model;
+use RA\Auth\Services\ClassName;
 
 class RegisterValidator
 {
@@ -21,7 +21,7 @@ class RegisterValidator
         }
 
         //check if user already exists
-        $item = Model::where('email', trim($data['email']))->first();
+        $item = ClassName::Model()::where('email', trim($data['email']))->first();
 
         if ( $item ) {
             return 'A user with this email already exists.';

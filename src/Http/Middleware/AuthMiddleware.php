@@ -11,14 +11,14 @@ class AuthMiddleware
         $response = SetUser::run($request);
 
         if ( $response !== true ) {
-            if ( env('RA_AUTH_LOGIN_STRATEGY') == 'session' ) {
+            if ( config('ra-auth.login_strategy') == 'session' ) {
                 if ( !in_array($_SERVER['REQUEST_URI'], ['/login', '/logout']) ) {
                     session(['redirect' => $_SERVER['REQUEST_URI']]);
                 }
 
                 return redirect(config('ra-auth.default_redirect_if_not_logged'));
             }
-            else if ( env('RA_AUTH_LOGIN_STRATEGY') == 'jwt' ) {
+            else if ( config('ra-auth.login_strategy') == 'jwt' ) {
                 return Response::error($response);
             }
         }

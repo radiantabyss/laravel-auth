@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Validators;
 
-use RA\Auth\Models\User as Model;
+use RA\Auth\Services\ClassName;
 
 class ResetPasswordValidator
 {
@@ -22,7 +22,7 @@ class ResetPasswordValidator
         }
 
         //check user
-        $item = Model::where('id', $data['id'])->where('reset_code', $data['reset_code'])->first();
+        $item = ClassName::Model()::where('id', $data['id'])->where('reset_code', $data['reset_code'])->first();
 
         if ( !$item ) {
             return 'ID and Reset Code combination is invalid.';

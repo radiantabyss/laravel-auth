@@ -7,22 +7,15 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends BaseModel implements AuthenticatableContract, AuthorizableContract
+class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable, SoftDeletes;
 
-    protected $guarded = [
-        'id', 'created_at', 'updated_at',
-    ];
+    protected $table = 'user';
 
     protected $hidden = [
         'password',
     ];
-
-    public function __construct($attributes = []) {
-        parent::__construct($attributes);
-        $this->table = env('RA_AUTH_TABLE_NAME');
-    }
 
     public function loadMeta($keys = []) {
         $metas = UserMeta::where('user_id', $this->id)->get();

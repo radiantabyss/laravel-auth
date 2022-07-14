@@ -5,9 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Action;
 use App\Core\MailSender;
 use App\Core\Response;
-use RA\Auth\Models\User as Model;
 use RA\Auth\Validators\ForgotPasswordValidator as Validator;
 use RA\Auth\Mail\ResetPasswordMail;
+use RA\Auth\Services\ClassName;
 
 class ForgotPasswordAction extends Action
 {
@@ -20,7 +20,7 @@ class ForgotPasswordAction extends Action
         }
 
         //get user by email
-        $item = Model::where('email', $data['email'])->first();
+        $item = ClassName::Model()::where('email', $data['email'])->first();
 
         //set reset code
         $item->update([

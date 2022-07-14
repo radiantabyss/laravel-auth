@@ -4,8 +4,6 @@ namespace RA\Auth\Http\Actions;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Action;
 use App\Core\Response;
-use RA\Auth\Models\User as Model;
-use RA\Auth\Models\UserToken as UserTokenModel;
 use RA\Auth\Presenters\UserPresenter as Presenter;
 use RA\Auth\Presenters\JwtPresenter;
 use RA\Auth\Validators\LoginValidator as Validator;
@@ -23,7 +21,7 @@ class LoginAction extends Action
             return Response::error($validation);
         }
 
-        $item = Model::where('email', trim($data['email']))->first();
+        $item = ClassName::Model()::where('email', trim($data['email']))->first();
         $item->update([
             'last_login_at' => date('Y-m-d H:i:s'),
         ]);
@@ -39,7 +37,7 @@ class LoginAction extends Action
     private function handleLoginStrategy($item, $data) {
         $jwt_token = $redirect = $remember_token = '';
 
-        if ( env('RA_AUTH_LOGIN_STRATEGY') == 'session' ) {
+        if ( config('ra-auth.login_strategy') == 'session' ) {
             \Auth::login($item);
 
             $redirect = config('ra-auth.redirect_after_login');
@@ -47,14 +45,14 @@ class LoginAction extends Action
                 $redirect = session('redirect');
             }
         }
-        else if ( env('RA_AUTH_LOGIN_STRATEGY') == 'jwt' ) {
+        else if ( config('ra-auth.login_strategy') == 'jwt' ) {
             $jwt_token = Jwt::generate(JwtPresenter::run(clone $item));
         }
 
         //generate remember token
         if ( isset($data['remember']) && $data['remember'] ) {
             $remember_token = \Hash::make(\Str::random(15));
-            UserTokenModel::create([
+            ClassName::TokenModel()::create([
                 'user_id' => $item->id,
                 'token' => $remember_token,
             ]);

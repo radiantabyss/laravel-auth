@@ -1,7 +1,6 @@
 <?php
 namespace RA\Auth\Validators;
 
-
 class UploadImageValidator
 {
     public static function run($data) {

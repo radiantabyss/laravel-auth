@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller as Action;
 use App\Core\Response;
 use RA\Auth\Validators\UploadImageValidator as Validator;
 use Intervention\Image\ImageManagerStatic as Image;
+use RA\Auth\Services\ClassName;
 
 class UploadImageAction extends Action
 {

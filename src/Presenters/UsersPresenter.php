@@ -1,13 +1,11 @@
 <?php
 namespace RA\Auth\Presenters;
 
-use RA\Auth\Models\User as Model;
-
 class UsersPresenter
 {
     public static function run($items) {
         //load meta
-        $items = Model::loadMetaForMany($items);
+        $items = ClassName::Model()::loadMetaForMany($items);
 
         //remove unwanted user fields
         foreach ( $items as $item ) {

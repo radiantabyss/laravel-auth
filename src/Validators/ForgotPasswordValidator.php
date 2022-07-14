@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Validators;
 
-use RA\Auth\Models\User as Model;
+use RA\Auth\Services\ClassName;
 
 class ForgotPasswordValidator
 {
@@ -18,7 +18,7 @@ class ForgotPasswordValidator
             return $validator->messages();
         }
 
-        $item = Model::where('email', $data['email'])->first();
+        $item = ClassName::Model()::where('email', $data['email'])->first();
 
         if ( !$item ) {
             return 'User not found.';

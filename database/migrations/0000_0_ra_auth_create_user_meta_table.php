@@ -13,7 +13,7 @@ class CreateUserLogTable extends Migration
      */
     public function up()
     {
-        Schema::create(env('RA_AUTH_TABLE_NAME').'_log', function (Blueprint $table) {
+        Schema::create('user_log', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('type');

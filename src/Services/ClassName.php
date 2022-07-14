@@ -3,6 +3,46 @@ namespace RA\Auth\Services;
 
 class ClassName
 {
+    public static function Model() {
+        if ( class_exists('\App\Models\User') ) {
+            return '\App\Models\User';
+        }
+
+        return '\RA\Auth\Models\User';
+    }
+
+    public static function InviteModel() {
+        if ( class_exists('\App\Models\UserInvite') ) {
+            return '\App\Models\UserInvite';
+        }
+
+        return '\RA\Auth\Models\UserInvite';
+    }
+
+    public static function LogModel() {
+        if ( class_exists('\App\Models\UserLog') ) {
+            return '\App\Models\UserLog';
+        }
+
+        return '\RA\Auth\Models\UserLog';
+    }
+
+    public static function MetaModel() {
+        if ( class_exists('\App\Models\UserMeta') ) {
+            return '\App\Models\UserMeta';
+        }
+
+        return '\RA\Auth\Models\UserMeta';
+    }
+
+    public static function TokenModel() {
+        if ( class_exists('\App\Models\UserToken') ) {
+            return '\App\Models\UserToken';
+        }
+
+        return '\RA\Auth\Models\UserToken';
+    }
+
     public static function Presenter() {
         if ( class_exists('\App\Domains\Auth\Presenter') ) {
             return '\App\Domains\Auth\Presenter';

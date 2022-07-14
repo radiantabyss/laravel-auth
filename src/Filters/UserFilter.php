@@ -1,9 +1,9 @@
 <?php
 namespace RA\Auth\Filters;
 
-use App\Filters\BaseFilter;
+use App\Core\Filter;
 
 class UserFilter
 {
-    use BaseFilter;
+    use Filter;
 }

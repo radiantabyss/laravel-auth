@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Validators;
 
-use RA\Auth\Models\User as Model;
+use RA\Auth\Services\ClassName;
 
 class LoginValidator
 {
@@ -21,7 +21,7 @@ class LoginValidator
         }
 
         //get user
-        $item = Model::where('email', trim($data['email']))->first();
+        $item = ClassName::Model()::where('email', trim($data['email']))->first();
 
         //check if user exists
         if ( !$item ) {
@@ -29,7 +29,7 @@ class LoginValidator
         }
 
         //check if user has been activated
-        if ( env('RA_AUTH_ACTIVATION_REQUIRED') && $item->activation_code ) {
+        if ( config('ra-auth.activation_required') && $item->activation_code ) {
             return 'This account hasn\'t been activated yet.';
         }
 

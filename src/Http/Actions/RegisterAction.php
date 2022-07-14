@@ -5,8 +5,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Action;
 use App\Core\MailSender;
 use App\Core\Response;
-use RA\Auth\Models\User as Model;
-use RA\Auth\Models\UserMeta as UserMetaModel;
 use RA\Auth\Presenters\JwtPresenter;
 use RA\Auth\Mail\ActivateAccountMail;
 use RA\Auth\Services\ClassName;
@@ -28,11 +26,11 @@ class RegisterAction extends Action
         $meta = $data['meta'] ?? [];
         unset($data['meta']);
 
-        $item = Model::create($data);
+        $item = ClassName::Model()::create($data);
 
         //insert meta
         foreach ( $meta as $key => $value ) {
-            UserMetaModel::create([
+            ClassName::MetaModel()::create([
                 'user_id' => $item->id,
                 'key' => $key,
                 'value' => $value,
@@ -40,17 +38,17 @@ class RegisterAction extends Action
         }
 
         //get redirect
-        $redirect = env('RA_AUTH_LOGIN_STRATEGY') == 'session' ? config('ra-auth.redirect_after_register') : '';
+        $redirect = config('ra-auth.login_strategy') == 'session' ? config('ra-auth.redirect_after_register') : '';
 
         //login
-        if ( !env('RA_AUTH_ACTIVATION_REQUIRED') && env('RA_AUTH_LOGIN_STRATEGY') == 'session' ) {
+        if ( !config('ra-auth.activation_required') && config('ra-auth.login_strategy') == 'session' ) {
             \Auth::login($item);
             $redirect = config('ra-auth.redirect_after_login');
         }
 
         //create jwt token
         $jwt_token = '';
-        if ( !env('RA_AUTH_ACTIVATION_REQUIRED') && env('RA_AUTH_LOGIN_STRATEGY') == 'jwt' ) {
+        if ( !config('ra-auth.activation_required') && config('ra-auth.login_strategy') == 'jwt' ) {
             $jwt_token =  Jwt::generate(JwtPresenter::run(clone $item));
         }
 

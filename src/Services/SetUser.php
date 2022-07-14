@@ -1,8 +1,6 @@
 <?php
 namespace RA\Auth\Services;
 
-use RA\Auth\Models\User as Model;
-
 class SetUser
 {
     private static $request;
@@ -10,7 +8,7 @@ class SetUser
     public static function run($request) {
         self::$request = $request;
 
-        $strategy = env('RA_AUTH_LOGIN_STRATEGY');
+        $strategy = config('ra-auth.login_strategy');
         return self::$strategy();
     }
 
@@ -19,7 +17,7 @@ class SetUser
             return false;
         }
 
-        $user = Model::find(\Auth::user()->id);
+        $user = ClassName::Model()::find(\Auth::user()->id);
         $user = ClassName::Presenter()::run($user);
         \Auth::setUser($user);
 
@@ -44,7 +42,7 @@ class SetUser
         }
 
         //get user from token
-        $user = Model::where('id', $token->id)
+        $user = ClassName::Model()::where('id', $token->id)
             ->where('uuid', $token->uuid)
             ->first();
 

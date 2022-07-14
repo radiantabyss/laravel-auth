@@ -13,7 +13,7 @@ class CreateUserTokenTable extends Migration
      */
     public function up()
     {
-        Schema::create(env('RA_AUTH_TABLE_NAME').'_token', function (Blueprint $table) {
+        Schema::create('user_token', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('token');

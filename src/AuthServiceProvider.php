@@ -10,9 +10,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //ensure env variables
-        $this->ensureEnv();
-
         //load views
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'ra-auth');
 
@@ -30,32 +27,6 @@ class AuthServiceProvider extends ServiceProvider
 
         //register middleware
         $this->registerMiddleware();
-    }
-
-    private function ensureEnv() {
-        $errors = [];
-
-        if ( env('RA_AUTH_TABLE_NAME') === null ) {
-            $errors[] = 'Env variable RA_AUTH_TABLE_NAME is required. Example: user';
-        }
-
-        if ( env('RA_AUTH_LOGIN_STRATEGY') === null ) {
-            $errors[] = 'Env variable RA_AUTH_LOGIN_STRATEGY is required. Possible values: session, jwt';
-        }
-
-        if ( env('RA_AUTH_DB_CONNECTION') === null ) {
-            $errors[] = 'Env variable RA_AUTH_DB_CONNECTION is required. Example: mysql';
-        }
-
-        if ( env('RA_AUTH_ACTIVATION_REQUIRED') === null ) {
-            $errors[] = 'Env variable RA_AUTH_ACTIVATION_REQUIRED is required. boolean';
-        }
-
-        if ( !count($errors) ) {
-            return;
-        }
-
-        throw new \Exception(implode("\n", $errors));
     }
 
     private function registerMiddleware() {

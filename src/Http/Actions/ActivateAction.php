@@ -3,7 +3,6 @@ namespace RA\Auth\Http\Actions;
 
 use Illuminate\Routing\Controller as Action;
 use App\Core\Response;
-use RA\Auth\Models\User as Model;
 use RA\Auth\Presenters\JwtPresenter;
 use RA\Auth\Validators\ActivateValidator as Validator;
 use RA\Auth\Services\ClassName;
@@ -17,7 +16,7 @@ class ActivateAction extends Action
             return Response::error($validation);
         }
 
-        $item = Model::find($id);
+        $item = ClassName::Model()::find($id);
         $item->update([
             'activation_code' => null
         ]);
@@ -25,7 +24,7 @@ class ActivateAction extends Action
         $item = ClassName::Presenter()::run($item);
 
         //create jwt token
-        $jwt_token = env('RA_AUTH_LOGIN_STRATEGY') == 'jwt' ? Jwt::generate(JwtPresenter::run(clone $item)) : '';
+        $jwt_token = config('ra-auth.login_strategy') == 'jwt' ? Jwt::generate(JwtPresenter::run(clone $item)) : '';
 
         return Response::success(compact('item', 'jwt_token'));
     }

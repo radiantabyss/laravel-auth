@@ -4,7 +4,6 @@ namespace RA\Auth\Http\Actions;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Action;
 use App\Core\Response;
-use RA\Auth\Models\User as Model;
 use RA\Auth\Presenters\JwtPresenter;
 use RA\Auth\Validators\ResetPasswordValidator as Validator;
 use RA\Auth\Services\ClassName;
@@ -21,7 +20,7 @@ class ResetPasswordAction extends Action
             return Response::error($validation);
         }
 
-        $item = Model::find($data['id']);
+        $item = ClassName::Model()::find($data['id']);
         $item->update([
             'password' => app('hash')->make($data['password']),
             'reset_code' => null,
@@ -31,7 +30,7 @@ class ResetPasswordAction extends Action
         $item = ClassName::Presenter()::run($item);
 
         //create jwt token
-        $jwt_token = env('RA_AUTH_LOGIN_STRATEGY') == 'jwt' ? Jwt::generate(JwtPresenter::run(clone $item)) : '';
+        $jwt_token = config('ra-auth.login_strategy') == 'jwt' ? Jwt::generate(JwtPresenter::run(clone $item)) : '';
 
         return Response::success(compact('item', 'jwt_token'));
     }

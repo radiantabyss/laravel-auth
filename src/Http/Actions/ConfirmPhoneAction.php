@@ -4,8 +4,8 @@ namespace RA\Auth\Http\Actions;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Action;
 use App\Core\Response;
-use RA\Auth\Models\UserMeta as UserMetaModel;
 use RA\Auth\Validators\ValidatePhoneValidator as Validator;
+use RA\Auth\Services\ClassName;
 
 class ConfirmPhoneAction extends Action
 {
@@ -19,11 +19,11 @@ class ConfirmPhoneAction extends Action
             return Response::error($validation);
         }
 
-        UserMetaModel::where('user_id', $item->id)->where('key', 'phone_is_valid')->update([
+        ClassName::MetaModel()::where('user_id', $item->id)->where('key', 'phone_is_valid')->update([
             'phone_is_valid' => true,
         ]);
 
-        UserMetaModel::where('user_id', $item->id)->where('key', 'phone_is_valid')->update([
+        ClassName::MetaModel()::where('user_id', $item->id)->where('key', 'phone_is_valid')->update([
             'phone_validation_code' => null,
         ]);
 

@@ -13,7 +13,7 @@ class CreateUserTable extends Migration
      */
     public function up()
     {
-        Schema::create(env('RA_AUTH_TABLE_NAME'), function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid');
             $table->string('type');
@@ -25,6 +25,7 @@ class CreateUserTable extends Migration
             $table->timestamp('reset_code_date')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamp('last_login_at')->nullable();
+            $table->string('stripe_id')->nullable();
             $table->timestamps();
 			$table->softDeletes();
         });

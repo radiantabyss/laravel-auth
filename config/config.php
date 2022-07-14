@@ -1,7 +1,10 @@
 <?php
 return [
+    'login_strategy' => env('RA_AUTH_LOGIN_STRATEGY', 'jwt'),
+    'activation_required' => env('RA_AUTH_ACTIVATION_REQUIRED', false),
+
     'default_user_type' => 'user',
-    
+
     'default_redirect_if_logged' => '/',
     'default_redirect_if_not_logged' => '/login',
 
