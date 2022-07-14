@@ -9,6 +9,7 @@ use RA\Auth\Models\UserToken as UserTokenModel;
 use RA\Auth\Presenters\UserPresenter as Presenter;
 use RA\Auth\Presenters\JwtPresenter;
 use RA\Auth\Validators\LoginValidator as Validator;
+use RA\Auth\Services\ClassName;
 use RA\Auth\Services\Jwt;
 
 class LoginAction extends Action
@@ -30,7 +31,7 @@ class LoginAction extends Action
         //handle login strategy
         $response = $this->handleLoginStrategy($item, $data);
 
-        $item = Presenter::run($item);
+        $item = ClassName::Presenter()::run($item);
 
         return Response::success(array_merge($response, compact('item')));
     }

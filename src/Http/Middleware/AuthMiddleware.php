@@ -2,13 +2,13 @@
 namespace RA\Auth\Http\Middleware;
 
 use App\Core\Response;
-use RA\Auth\Services\Login;
+use RA\Auth\Services\SetUser;
 
 class AuthMiddleware
 {
     public function handle($request, \Closure $next)
     {
-        $response = Login::run($request);
+        $response = SetUser::run($request);
 
         if ( $response !== true ) {
             if ( env('RA_AUTH_LOGIN_STRATEGY') == 'session' ) {

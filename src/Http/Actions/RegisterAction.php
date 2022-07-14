@@ -7,11 +7,9 @@ use App\Core\MailSender;
 use App\Core\Response;
 use RA\Auth\Models\User as Model;
 use RA\Auth\Models\UserMeta as UserMetaModel;
-use RA\Auth\Presenters\UserPresenter as Presenter;
 use RA\Auth\Presenters\JwtPresenter;
-use RA\Auth\Transformers\RegisterTransformer as Transformer;
-use RA\Auth\Validators\RegisterValidator as Validator;
 use RA\Auth\Mail\ActivateAccountMail;
+use RA\Auth\Services\ClassName;
 use RA\Auth\Services\Jwt;
 
 class RegisterAction extends Action
@@ -20,13 +18,13 @@ class RegisterAction extends Action
         $data = $request->all();
 
         //validate
-        $validation = Validator::run($data);
+        $validation = ClassName::RegisterValidator()::run($data);
         if ( $validation !== true ) {
             return Response::error($validation);
         }
 
         //transform data and insert
-        $data = Transformer::run($data);
+        $data = ClassName::RegisterTransformer()::run($data);
         $meta = $data['meta'] ?? [];
         unset($data['meta']);
 
@@ -41,9 +39,6 @@ class RegisterAction extends Action
             ]);
         }
 
-        //create jwt token
-        $jwt_token = env('RA_AUTH_LOGIN_STRATEGY') == 'jwt' ? Jwt::generate(JwtPresenter::run(clone $item)) : '';
-
         //get redirect
         $redirect = env('RA_AUTH_LOGIN_STRATEGY') == 'session' ? config('ra-auth.redirect_after_register') : '';
 
@@ -53,8 +48,14 @@ class RegisterAction extends Action
             $redirect = config('ra-auth.redirect_after_login');
         }
 
+        //create jwt token
+        $jwt_token = '';
+        if ( !env('RA_AUTH_ACTIVATION_REQUIRED') && env('RA_AUTH_LOGIN_STRATEGY') == 'jwt' ) {
+            $jwt_token =  Jwt::generate(JwtPresenter::run(clone $item));
+        }
+
         //format
-        $item = Presenter::run($item);
+        $item = ClassName::Presenter()::run($item);
 
         //send activation mail
         MailSender::send(ActivateAccountMail::class, $item->email, $item);

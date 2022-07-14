@@ -5,9 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Action;
 use App\Core\Response;
 use RA\Auth\Models\User as Model;
-use RA\Auth\Presenters\UserPresenter as Presenter;
 use RA\Auth\Presenters\JwtPresenter;
 use RA\Auth\Validators\ResetPasswordValidator as Validator;
+use RA\Auth\Services\ClassName;
 use RA\Auth\Services\Jwt;
 
 class ResetPasswordAction extends Action
@@ -27,7 +27,8 @@ class ResetPasswordAction extends Action
             'reset_code' => null,
             'last_login_at' => date('Y-m-d H:i:s'),
         ]);
-        $item = Presenter::run($item);
+
+        $item = ClassName::Presenter()::run($item);
 
         //create jwt token
         $jwt_token = env('RA_AUTH_LOGIN_STRATEGY') == 'jwt' ? Jwt::generate(JwtPresenter::run(clone $item)) : '';

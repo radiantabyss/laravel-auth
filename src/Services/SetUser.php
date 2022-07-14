@@ -2,9 +2,8 @@
 namespace RA\Auth\Services;
 
 use RA\Auth\Models\User as Model;
-use RA\Auth\Presenters\UserPresenter as Presenter;
 
-class Login
+class SetUser
 {
     private static $request;
 
@@ -21,7 +20,7 @@ class Login
         }
 
         $user = Model::find(\Auth::user()->id);
-        $user = Presenter::run($user);
+        $user = ClassName::Presenter()::run($user);
         \Auth::setUser($user);
 
         return true;
@@ -55,7 +54,7 @@ class Login
         }
 
         //format
-        $user = Presenter::run($user);
+        $user = ClassName::Presenter()::run($user);
         \Auth::setUser($user);
 
         return true;
