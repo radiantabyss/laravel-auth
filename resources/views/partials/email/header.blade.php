@@ -98,7 +98,7 @@
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailHeader">
                                         <tr>
                                             <td align="center" valign="top" style="padding-top: 36px; padding-bottom: 33px;">
-                                                <img src="{{ config('path.frontend_url') ?: config('app.url') }}/img/favicon.png" style="width: 127px; height: 45px;" width="127" height="45" />
+                                                <img src="{{ config('path.front_url') }}/img/favicon.png" style="width: 127px; height: 45px;" width="127" height="45" />
                                             </td>
                                         </tr>
                                     </table>
