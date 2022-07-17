@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Http\Middleware;
 
-use App\Core\Response;
+use RA\Core\Response;
 
 class NoAuthMiddleware
 {

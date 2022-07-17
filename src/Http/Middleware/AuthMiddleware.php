@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Http\Middleware;
 
-use App\Core\Response;
+use RA\Core\Response;
 use RA\Auth\Services\SetUser;
 
 class AuthMiddleware

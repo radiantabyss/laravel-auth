@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Filters;
 
-use App\Core\Filter;
+use RA\Core\Filter;
 
 class UserFilter
 {

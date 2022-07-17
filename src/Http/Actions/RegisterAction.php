@@ -3,8 +3,8 @@ namespace RA\Auth\Http\Actions;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Action;
-use App\Core\MailSender;
-use App\Core\Response;
+use RA\Core\MailSender;
+use RA\Core\Response;
 use RA\Auth\Presenters\JwtPresenter;
 use RA\Auth\Mail\ActivateAccountMail;
 use RA\Auth\Services\ClassName;

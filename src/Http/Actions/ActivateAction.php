@@ -2,7 +2,7 @@
 namespace RA\Auth\Http\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use App\Core\Response;
+use RA\Core\Response;
 use RA\Auth\Presenters\JwtPresenter;
 use RA\Auth\Validators\ActivateValidator as Validator;
 use RA\Auth\Services\ClassName;

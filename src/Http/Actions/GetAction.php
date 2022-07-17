@@ -2,7 +2,7 @@
 namespace RA\Auth\Http\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use App\Core\Response;
+use RA\Core\Response;
 
 class GetAction extends Action
 {

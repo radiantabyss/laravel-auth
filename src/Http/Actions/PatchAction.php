@@ -3,7 +3,7 @@ namespace RA\Auth\Http\Actions;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Action;
-use App\Core\Response;
+use RA\Core\Response;
 use RA\Auth\Services\ClassName;
 
 class PatchAction extends Action
