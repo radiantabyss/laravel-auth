@@ -76,7 +76,7 @@ class ClassName
             return '\App\Domains\Auth\Transformers\RegisterTransformer';
         }
 
-        return '\RA\Auth\Validators\RegisterTransformer';
+        return '\RA\Auth\Transformers\RegisterTransformer';
     }
 
     public static function PatchValidator() {
@@ -101,5 +101,29 @@ class ClassName
         }
 
         return '\RA\Auth\Validators\PatchTransformer';
+    }
+
+    public static function AcceptInviteValidator() {
+        if ( class_exists('\App\Domains\Auth\AcceptInviteValidator') ) {
+            return '\App\Domains\Auth\AcceptInviteValidator';
+        }
+
+        if ( class_exists('\App\Domains\Auth\Validators\AcceptInviteValidator') ) {
+            return '\App\Domains\Auth\Validators\AcceptInviteValidator';
+        }
+
+        return '\RA\Auth\Validators\AcceptInviteValidator';
+    }
+
+    public static function AcceptInviteTransformer() {
+        if ( class_exists('\App\Domains\Auth\AcceptInviteTransformer') ) {
+            return '\App\Domains\Auth\AcceptInviteTransformer';
+        }
+
+        if ( class_exists('\App\Domains\Auth\Transformers\AcceptInviteTransformer') ) {
+            return '\App\Domains\Auth\Transformers\AcceptInviteTransformer';
+        }
+
+        return '\RA\Auth\Transformers\AcceptInviteTransformer';
     }
 }

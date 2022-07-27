@@ -16,7 +16,6 @@
     ],
     "require": {
         "php": "^7.1",
-        "intervention/image": "2.7.2",
         "firebase/php-jwt": "5.5.1"
     },
     "autoload": {
