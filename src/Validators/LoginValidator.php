@@ -39,7 +39,7 @@ class LoginValidator
         }
 
         //verify password
-        if ( !app('hash')->check($data['password'], $item->password) ) {
+        if ( !\Hash::check($data['password'], $item->password) ) {
             return 'Email and password combination is not valid.';
         }
 

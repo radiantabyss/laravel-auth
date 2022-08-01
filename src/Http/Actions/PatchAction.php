@@ -18,9 +18,30 @@ class PatchAction extends Action
             return Response::error($validation);
         }
 
-        //update
+        //transform data
         $data = ClassName::PatchTransformer()::run($data);
+
+        //get meta
+        $meta = [];
+        if ( isset($data['meta']) ) {
+            $meta = $data['meta'];
+            unset($data['meta']);
+        }
+
+        //update
         ClassName::Model()::where('id', $item->id)->update($data);
+
+        //update meta
+        foreach ( $meta as $key => $value ) {
+            ClassName::MetaModel()::updateOrCreate([
+                'user_id' => $item->id,
+                'key' => $key,
+            ], [
+                'user_id' => $item->id,
+                'key' => $key,
+                'value' => $value,
+            ]);
+        }
 
         //get for return
         $item = ClassName::Model()::where('id', $item->id)->first();
