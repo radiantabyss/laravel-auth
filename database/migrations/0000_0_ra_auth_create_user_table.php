@@ -17,7 +17,7 @@ class CreateUserTable extends Migration
             $table->bigIncrements('id');
             $table->string('uuid');
             $table->string('type');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('email', 100)->index()->nullable();
             $table->string('password')->nullable();
             $table->string('activation_code')->nullable();
