@@ -28,7 +28,7 @@ class ActivateAccountMail extends Mailable
      */
     public function build()
     {
-        return $this->subject(config('ra-auth.mail_subjects.reset-password'))
+        return $this->subject(config('ra-auth.mail_subjects.activate-account'))
             ->view('ra.auth.partials.email.activate-account', [
                 'user' => $this->user,
             ]);
