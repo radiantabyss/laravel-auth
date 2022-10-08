@@ -3,7 +3,7 @@ namespace RA\Auth\Validators;
 
 use RA\Auth\Services\ClassName;
 
-class ActivateValidator
+class AcceptInviteValidator
 {
     public static function run($data) {
         //validate request params
