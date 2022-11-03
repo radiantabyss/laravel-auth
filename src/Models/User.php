@@ -58,7 +58,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $items;
     }
 
-    public function log($message, $type = '') {
+    public function log($type, $message = '') {
         UserLog::create([
             'user_id' => $this->id,
             'type' => $type,

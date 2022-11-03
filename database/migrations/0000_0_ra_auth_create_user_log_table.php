@@ -15,11 +15,10 @@ class CreateUserLogTable extends Migration
     {
         Schema::create('user_log', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->index('user_id');
             $table->string('type');
             $table->string('message', 500)->nullable();
-
-            $table->index('user_id');
+            $table->timestamps();
         });
     }
 
