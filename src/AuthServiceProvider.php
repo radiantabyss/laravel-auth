@@ -14,12 +14,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->enablePublishing();
 
         //register view domains
-        $domains = [
-            'User', 'Team'
-        ];
-        foreach ( $domains as $domain ) {
-            \View::addNamespace('RA.Auth.'.$domain, __DIR__.'/Domains/'.$domain.'/Mail/views');
-        }
+        \View::addNamespace('RA.Auth', __DIR__.'/Domains/Auth/Mail/views');
     }
 
     /**
@@ -39,6 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         $router->aliasMiddleware('RA\Auth\Logged', \RA\Auth\Http\Middleware\LoggedMiddleware::class);
         $router->aliasMiddleware('RA\Auth\NotLogged', \RA\Auth\Http\Middleware\NoLoggedMiddleware::class);
         $router->aliasMiddleware('RA\Auth\SetUser', \RA\Auth\Http\Middleware\SetUserMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\Role', \RA\Auth\Http\Middleware\RoleMiddleware::class);
     }
 
     private function enablePublishing() {
@@ -53,8 +49,33 @@ class AuthServiceProvider extends ServiceProvider
 
         //actions
         $this->publishes([
-            __DIR__.'/Domains/User' => app_path('Domains/RA/Auth/User'),
-        ], 'ra-auth:auth');
+            __DIR__.'/Domains/Auth/Actions' => app_path('Domains/Auth/Actions'),
+        ], 'ra-auth:actions');
+
+        //commands
+        $this->publishes([
+            __DIR__.'/Domains/Auth/Commands' => app_path('Domains/Auth/Commands'),
+        ], 'ra-auth:commands');
+
+        //mail
+        $this->publishes([
+            __DIR__.'/Domains/Auth/Mail' => app_path('Domains/Auth/Mail'),
+        ], 'ra-auth:mail');
+
+        //presenters
+        $this->publishes([
+            __DIR__.'/Domains/Auth/Presenters' => app_path('Domains/Auth/Presenters'),
+        ], 'ra-auth:presenters');
+
+        //transformers
+        $this->publishes([
+            __DIR__.'/Domains/Auth/Transformers' => app_path('Domains/Auth/Transformers'),
+        ], 'ra-auth:transformers');
+
+        //validators
+        $this->publishes([
+            __DIR__.'/Domains/Auth/Validators' => app_path('Domains/Auth/Validators'),
+        ], 'ra-auth:validators');
 
         //routes
         $this->publishes([
@@ -65,10 +86,5 @@ class AuthServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations' => base_path('database/migrations'),
         ], 'ra-auth:migrations');
-
-        //views
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/ra/auth'),
-        ], 'ra-auth:views');
     }
 }
