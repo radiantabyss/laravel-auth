@@ -1,26 +1,26 @@
 <?php
-use Illuminate\Support\Facades\Route;
+use RA\Core\Route;
 
 //no auth
 Route::group(['middleware' => ['RA\Auth\NoAuth']], function() {
-    Route::post('/register', ['uses' => 'RegisterAction@run']);
-    Route::post('/forgot-password', ['uses' => 'ForgotPasswordAction@run']);
-    Route::post('/reset-password', ['uses' => 'ResetPasswordAction@run']);
-    Route::post('/confirm', ['uses' => 'ConfirmAction@run']);
-    Route::post('/login', ['uses' => 'LoginAction@run']);
+    Route::post('/register', 'RegisterAction');
+    Route::post('/forgot-password', 'ForgotPasswordAction');
+    Route::post('/reset-password', 'ResetPasswordAction');
+    Route::post('/confirm', 'ConfirmAction');
+    Route::post('/login', 'LoginAction');
 
-    Route::post('/accept-invite', ['uses' => 'AcceptInviteAction@run']);
+    Route::post('/accept-invite', 'AcceptInviteAction');
 });
 
 //with auth
 Route::group(['middleware' => ['RA\Auth\Auth']], function() {
-    Route::get('/get', ['uses' => 'GetAction@run']);
-    Route::post('/patch', ['uses' => 'PatchAction@run']);
-    Route::post('/upload-logo', ['uses' => 'UploadLogoAction@run']);
-    Route::options('/upload-logo', ['uses' => 'UploadLogoAction@run']);
+    Route::get('/get', 'GetAction');
+    Route::post('/patch', 'PatchAction');
+    Route::post('/upload-logo', 'UploadLogoAction');
+    Route::options('/upload-logo', 'UploadLogoAction');
 
-    Route::post('/create-team', ['uses' => 'CreateTeamAction@run']);
-    Route::post('/update-team/{team_id}', ['uses' => 'UpdateTeamAction@run']);
-    Route::post('/switch-team/{team_id}', ['uses' => 'SwitchTeamAction@run']);
-    Route::post('/invite', ['uses' => 'InviteAction@run']);
+    Route::post('/create-team', 'CreateTeamAction');
+    Route::post('/update-team/{team_id}', 'UpdateTeamAction');
+    Route::post('/switch-team/{team_id}', 'SwitchTeamAction');
+    Route::post('/invite', 'InviteAction');
 });
