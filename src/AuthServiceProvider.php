@@ -10,11 +10,16 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'ra-auth');
-
         //enable publishing
         $this->enablePublishing();
+
+        //register view domains
+        $domains = [
+            'User', 'Team'
+        ];
+        foreach ( $domains as $domain ) {
+            \View::addNamespace('RA.Auth.'.$domain, __DIR__.'/Domains/'.$domain.'/Mail/views');
+        }
     }
 
     /**
@@ -31,8 +36,8 @@ class AuthServiceProvider extends ServiceProvider
 
     private function registerMiddleware() {
         $router = $this->app['router'];
-        $router->aliasMiddleware('RA\Auth\Auth', \RA\Auth\Http\Middleware\AuthMiddleware::class);
-        $router->aliasMiddleware('RA\Auth\NoAuth', \RA\Auth\Http\Middleware\NoAuthMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\Logged', \RA\Auth\Http\Middleware\LoggedMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\NotLogged', \RA\Auth\Http\Middleware\NoLoggedMiddleware::class);
         $router->aliasMiddleware('RA\Auth\SetUser', \RA\Auth\Http\Middleware\SetUserMiddleware::class);
     }
 
@@ -48,8 +53,8 @@ class AuthServiceProvider extends ServiceProvider
 
         //actions
         $this->publishes([
-            __DIR__.'/Http/Actions' => app_path('Http/Actions/RA/Auth'),
-        ], 'ra-auth:actions');
+            __DIR__.'/Domains/User' => app_path('Domains/RA/Auth/User'),
+        ], 'ra-auth:auth');
 
         //routes
         $this->publishes([

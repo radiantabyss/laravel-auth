@@ -1,6 +1,8 @@
 <?php
 namespace RA\Auth\Services;
 
+use RA\Auth\ClassName;
+
 class SetUser
 {
     private static $request;
@@ -8,23 +10,6 @@ class SetUser
     public static function run($request) {
         self::$request = $request;
 
-        $strategy = config('ra-auth.login_strategy');
-        return self::$strategy();
-    }
-
-    private static function session() {
-        if ( !\Auth::check() ) {
-            return false;
-        }
-
-        $user = ClassName::Model()::find(\Auth::user()->id);
-        $user = ClassName::Presenter()::run($user);
-        \Auth::setUser($user);
-
-        return true;
-    }
-
-    private static function jwt() {
         //get jwt token from request
         $payload = self::$request->get(config('jwt.input'));
 
@@ -42,7 +27,7 @@ class SetUser
         }
 
         //get user from token
-        $user = ClassName::Model()::where('id', $token->id)
+        $user = ClassName::Model('User')::where('id', $token->id)
             ->where('uuid', $token->uuid)
             ->first();
 
@@ -52,7 +37,7 @@ class SetUser
         }
 
         //format
-        $user = ClassName::Presenter()::run($user);
+        $user = ClassName::Presenter('User\Presenter')::run($user, $token->team_id);
         \Auth::setUser($user);
 
         return true;

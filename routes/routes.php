@@ -6,7 +6,7 @@ Route::group(['middleware' => ['RA\Auth\NoAuth']], function() {
     Route::post('/register', ['uses' => 'RegisterAction@run']);
     Route::post('/forgot-password', ['uses' => 'ForgotPasswordAction@run']);
     Route::post('/reset-password', ['uses' => 'ResetPasswordAction@run']);
-    Route::post('/activate/{id}/{activation_code}', ['uses' => 'ActivateAction@run']);
+    Route::post('/confirm', ['uses' => 'ConfirmAction@run']);
     Route::post('/login', ['uses' => 'LoginAction@run']);
     Route::post('/accept-invite', ['uses' => 'AcceptInviteAction@run']);
 });

@@ -3,127 +3,35 @@ namespace RA\Auth\Services;
 
 class ClassName
 {
-    public static function Model() {
-        if ( class_exists('\App\Models\User') ) {
-            return '\App\Models\User';
+    public static function Model($model) {
+        if ( class_exists('\App\Models\\'.$model) ) {
+            return '\App\Models\\'.$model;
         }
 
-        return '\RA\Auth\Models\User';
+        return '\RA\Auth\Models\\'.$model;
     }
 
-    public static function InviteModel() {
-        if ( class_exists('\App\Models\UserInvite') ) {
-            return '\App\Models\UserInvite';
+    public static function Presenter($presenter) {
+        if ( class_exists('\App\Domains\Auth\Presenters\\'.$presenter) ) {
+            return '\App\Domains\Auth\Presenters\\'.$presenter;
         }
 
-        return '\RA\Auth\Models\UserInvite';
+        return '\RA\Auth\Domains\Auth\Presenters\\'.$presenter;
     }
 
-    public static function LogModel() {
-        if ( class_exists('\App\Models\UserLog') ) {
-            return '\App\Models\UserLog';
+    public static function Validator($validator) {
+        if ( class_exists('\App\Domains\Auth\Validators\\'.$validator) ) {
+            return '\App\Domains\Auth\Validators\\'.$validator;
         }
 
-        return '\RA\Auth\Models\UserLog';
+        return '\RA\Auth\Domains\Auth\Validators\\'.$validator;
     }
 
-    public static function MetaModel() {
-        if ( class_exists('\App\Models\UserMeta') ) {
-            return '\App\Models\UserMeta';
+    public static function Transformer($transformer) {
+        if ( class_exists('\App\Domains\Auth\Transformers\\'.$transformer) ) {
+            return '\App\Domains\Auth\Transformers\\'.$transformer;
         }
 
-        return '\RA\Auth\Models\UserMeta';
-    }
-
-    public static function TokenModel() {
-        if ( class_exists('\App\Models\UserToken') ) {
-            return '\App\Models\UserToken';
-        }
-
-        return '\RA\Auth\Models\UserToken';
-    }
-
-    public static function Presenter() {
-        if ( class_exists('\App\Domains\Auth\Presenter') ) {
-            return '\App\Domains\Auth\Presenter';
-        }
-
-        if ( class_exists('\App\Domains\Auth\Presenters\Presenter') ) {
-            return '\App\Domains\Auth\Presenters\Presenter';
-        }
-
-        return '\RA\Auth\Presenters\UserPresenter';
-    }
-
-    public static function RegisterValidator() {
-        if ( class_exists('\App\Domains\Auth\RegisterValidator') ) {
-            return '\App\Domains\Auth\RegisterValidator';
-        }
-
-        if ( class_exists('\App\Domains\Auth\Validators\RegisterValidator') ) {
-            return '\App\Domains\Auth\Validators\RegisterValidator';
-        }
-
-        return '\RA\Auth\Validators\RegisterValidator';
-    }
-
-    public static function RegisterTransformer() {
-        if ( class_exists('\App\Domains\Auth\RegisterTransformer') ) {
-            return '\App\Domains\Auth\RegisterTransformer';
-        }
-
-        if ( class_exists('\App\Domains\Auth\Transformers\RegisterTransformer') ) {
-            return '\App\Domains\Auth\Transformers\RegisterTransformer';
-        }
-
-        return '\RA\Auth\Transformers\RegisterTransformer';
-    }
-
-    public static function PatchValidator() {
-        if ( class_exists('\App\Domains\Auth\PatchValidator') ) {
-            return '\App\Domains\Auth\PatchValidator';
-        }
-
-        if ( class_exists('\App\Domains\Auth\Validators\PatchValidator') ) {
-            return '\App\Domains\Auth\Validators\PatchValidator';
-        }
-
-        return '\RA\Auth\Validators\PatchValidator';
-    }
-
-    public static function PatchTransformer() {
-        if ( class_exists('\App\Domains\Auth\PatchTransformer') ) {
-            return '\App\Domains\Auth\PatchTransformer';
-        }
-
-        if ( class_exists('\App\Domains\Auth\Transformers\PatchTransformer') ) {
-            return '\App\Domains\Auth\Transformers\PatchTransformer';
-        }
-
-        return '\RA\Auth\Validators\PatchTransformer';
-    }
-
-    public static function AcceptInviteValidator() {
-        if ( class_exists('\App\Domains\Auth\AcceptInviteValidator') ) {
-            return '\App\Domains\Auth\AcceptInviteValidator';
-        }
-
-        if ( class_exists('\App\Domains\Auth\Validators\AcceptInviteValidator') ) {
-            return '\App\Domains\Auth\Validators\AcceptInviteValidator';
-        }
-
-        return '\RA\Auth\Validators\AcceptInviteValidator';
-    }
-
-    public static function AcceptInviteTransformer() {
-        if ( class_exists('\App\Domains\Auth\AcceptInviteTransformer') ) {
-            return '\App\Domains\Auth\AcceptInviteTransformer';
-        }
-
-        if ( class_exists('\App\Domains\Auth\Transformers\AcceptInviteTransformer') ) {
-            return '\App\Domains\Auth\Transformers\AcceptInviteTransformer';
-        }
-
-        return '\RA\Auth\Transformers\AcceptInviteTransformer';
+        return '\RA\Auth\Domains\Auth\Transformers\\'.$transformer;
     }
 }
