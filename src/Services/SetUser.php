@@ -1,8 +1,6 @@
 <?php
 namespace RA\Auth\Services;
 
-use RA\Auth\ClassName;
-
 class SetUser
 {
     private static $request;
@@ -37,7 +35,7 @@ class SetUser
         }
 
         //format
-        $user = ClassName::Presenter('User\Presenter')::run($user, $token->team_id);
+        $user = ClassName::Presenter('Presenter')::run($user, $token->team_id);
         \Auth::setUser($user);
 
         return true;
