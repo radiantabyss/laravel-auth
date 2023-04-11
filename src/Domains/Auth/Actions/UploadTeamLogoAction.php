@@ -6,14 +6,14 @@ use RA\Core\Response;
 use Intervention\Image\ImageManagerStatic as Image;
 use RA\Auth\Services\ClassName;
 
-class UploadImageAction extends Action
+class UploadTeamLogoAction extends Action
 {
     public function run() {
         $item = \Auth::user();
         $data = \Request::all();
 
         //validate request data
-        $validation = ClassName::Validator('UploadImageValidator')::run($data);
+        $validation = ClassName::Validator('UploadTeamLogoValidator')::run($data);
         if ( $validation !== true ) {
             return Response::error($validation);
         }
@@ -23,7 +23,7 @@ class UploadImageAction extends Action
         $image_name = \Str::slug($pathinfo['filename']).'-'.\Str::random(5).'.'.$pathinfo['extension'];
 
         //set destination path
-        $path = config('ra-auth.uploads_path').'/user-profile-images';
+        $path = config('ra-auth.uploads_path').'/user-team-logos';
 
         //make folder if not exists
         if ( !file_exists($path.'/'.$item->id) ) {

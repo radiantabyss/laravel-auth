@@ -20,7 +20,7 @@ class RegisterAction extends Action
         }
 
         //transform data and insert
-        $data = ClassName::Transformers('RegisterTransformer')::run($data);
+        $data = ClassName::Transformer('RegisterTransformer')::run($data);
         $meta = $data['meta'] ?? [];
         unset($data['meta']);
 
@@ -36,13 +36,14 @@ class RegisterAction extends Action
         }
 
         //create default team
-        ClassName::Model('UserTeam')::create([
+        $team = ClassName::Model('UserTeam')::create([
             'user_id' => $item->id,
             'name' => 'My Team',
         ]);
 
         //insert user in own team
         ClassName::Model('UserTeamMember')::create([
+            'team_id' => $team->id,
             'user_id' => $item->id,
             'role' => 'owner',
         ]);

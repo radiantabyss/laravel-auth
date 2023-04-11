@@ -8,10 +8,10 @@ class InviteMail extends Mail
     public function build() {
         $this->subject(config('ra-auth.mail_subjects.invite'));
 
-        try {
+        if ( \View::exists('Auth::invite') ) {
             $this->view('Auth::invite', $this->params);
         }
-        catch(Exception $e) {
+        else {
             $this->view('RA.Auth::invite', $this->params);
         }
 

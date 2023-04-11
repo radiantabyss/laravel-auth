@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace RA\Auth\Models;
 
 class UserInvite extends Model
 {

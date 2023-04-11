@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Domains\Auth\Validators;
 
-class UploadImageValidator
+class UploadProfileImageValidator
 {
     public static function run($data) {
         //validate request params
