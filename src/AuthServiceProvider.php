@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
     private function registerMiddleware() {
         $router = $this->app['router'];
         $router->aliasMiddleware('RA\Auth\Logged', \RA\Auth\Http\Middleware\LoggedMiddleware::class);
-        $router->aliasMiddleware('RA\Auth\NotLogged', \RA\Auth\Http\Middleware\NoLoggedMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\NotLogged', \RA\Auth\Http\Middleware\NotLoggedMiddleware::class);
         $router->aliasMiddleware('RA\Auth\SetUser', \RA\Auth\Http\Middleware\SetUserMiddleware::class);
         $router->aliasMiddleware('RA\Auth\Role', \RA\Auth\Http\Middleware\RoleMiddleware::class);
     }

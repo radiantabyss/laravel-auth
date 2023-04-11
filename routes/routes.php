@@ -2,7 +2,7 @@
 use RA\Core\Route;
 
 //no auth
-Route::group(['middleware' => ['RA\Auth\NoAuth']], function() {
+Route::group(['middleware' => ['RA\Auth\NotLogged']], function() {
     Route::post('/register', 'RegisterAction');
     Route::post('/forgot-password', 'ForgotPasswordAction');
     Route::post('/reset-password', 'ResetPasswordAction');
@@ -13,7 +13,7 @@ Route::group(['middleware' => ['RA\Auth\NoAuth']], function() {
 });
 
 //with auth
-Route::group(['middleware' => ['RA\Auth\Auth']], function() {
+Route::group(['middleware' => ['RA\Auth\Logged']], function() {
     Route::get('/get', 'GetAction');
     Route::post('/patch', 'PatchAction');
     Route::post('/upload-logo', 'UploadLogoAction');
