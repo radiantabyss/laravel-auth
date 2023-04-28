@@ -2,6 +2,7 @@
 namespace RA\Auth;
 
 use Illuminate\Support\ServiceProvider;
+use RA\Auth\Services\ClassName;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->enablePublishing();
 
         //register view domains
-        \View::addNamespace('RA.Auth', __DIR__.'/Domains/Auth/Mail/views');
+        \View::addNamespace('RA.Auth.Team', __DIR__.'/Domains/Team/Mail/views');
+        \View::addNamespace('RA.Auth.User', __DIR__.'/Domains/User/Mail/views');
     }
 
     /**
@@ -27,6 +29,9 @@ class AuthServiceProvider extends ServiceProvider
 
         //register middleware
         $this->registerMiddleware();
+
+        //register gates
+        $this->registerGates();
     }
 
     private function registerMiddleware() {
@@ -34,7 +39,21 @@ class AuthServiceProvider extends ServiceProvider
         $router->aliasMiddleware('RA\Auth\Logged', \RA\Auth\Http\Middleware\LoggedMiddleware::class);
         $router->aliasMiddleware('RA\Auth\NotLogged', \RA\Auth\Http\Middleware\NotLoggedMiddleware::class);
         $router->aliasMiddleware('RA\Auth\SetUser', \RA\Auth\Http\Middleware\SetUserMiddleware::class);
-        $router->aliasMiddleware('RA\Auth\Role', \RA\Auth\Http\Middleware\RoleMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\TeamRole', \RA\Auth\Http\Middleware\TeamRoleMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\UserType', \RA\Auth\Http\Middleware\UserTypeMiddleware::class);
+    }
+
+    private function registerGates() {
+        \Gate::define('manage-team', function($user, $team_id) {
+            if ( $user->type == 'super_admin' ) {
+                return true;
+            }
+
+            return ClassName::Model('UserTeamMember')::where('team_id', $team_id)
+                ->where('user_id', $user->id)
+                ->where('role', 'owner')
+                ->exists();
+        });
     }
 
     private function enablePublishing() {

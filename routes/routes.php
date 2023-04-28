@@ -3,26 +3,39 @@ use RA\Core\Route;
 
 //no auth
 Route::group(['middleware' => ['RA\Auth\NotLogged']], function() {
-    Route::post('/register', 'RegisterAction');
-    Route::post('/forgot-password', 'ForgotPasswordAction');
-    Route::post('/reset-password', 'ResetPasswordAction');
-    Route::post('/confirm', 'ConfirmAction');
-    Route::post('/login', 'LoginAction');
+    Route::post('/auth/user/register', 'User\RegisterAction');
+    Route::post('/auth/user/forgot-password', 'User\ForgotPasswordAction');
+    Route::post('/auth/user/reset-password', 'User\ResetPasswordAction');
+    Route::post('/auth/user/confirm', 'User\ConfirmAction');
+    Route::post('/auth/user/login', 'User\LoginAction');
 
-    Route::post('/accept-invite', 'AcceptInviteAction');
+    Route::post('/auth/user/accept-invite', 'User\AcceptInviteAction');
 });
 
 //with auth
 Route::group(['middleware' => ['RA\Auth\Logged']], function() {
-    Route::get('/get', 'GetAction');
-    Route::post('/patch', 'PatchAction');
-    Route::post('/upload-profile-image', 'UploadProfileImageAction');
-    Route::options('/upload-profile-image', 'UploadProfileImageAction');
+    Route::get('/auth/user/get', 'User\GetAction');
+    Route::post('/auth/user/patch', 'User\PatchAction');
+    Route::post('/auth/user/upload-profile-image', 'User\UploadProfileImageAction');
+    Route::options('/auth/user/upload-profile-image', 'User\UploadProfileImageAction');
 
-    Route::post('/create-team', 'CreateTeamAction');
-    Route::post('/update-team/{team_id}', 'UpdateTeamAction');
-    Route::post('/switch-team/{team_id}', 'SwitchTeamAction');
-    Route::post('/invite', 'InviteAction');
-    Route::post('/upload-team-logo', 'UploadTeamLogoAction');
-    Route::options('/upload-team-logo', 'UploadTeamLogoAction');
+
+    Route::get('/auth/team', 'Team\ListAction');
+    Route::post('/auth/team/create', 'Team\CreateAction');
+    Route::post('/auth/team/single/{id}', 'Team\SingleAction');
+    Route::post('/auth/team/switch/{id}', 'Team\SwitchAction');
+    Route::get('/auth/team/edit/{id}', 'Team\EditAction');
+    Route::post('/auth/team/update/{id}', 'Team\UpdateAction');
+    Route::get('/auth/team/delete/{id}', 'Team\DeleteAction');
+    Route::get('/auth/team/leave/{id}', 'Team\LeaveAction');
+    Route::post('/auth/team/upload-image', 'Team\UploadImageAction');
+    Route::options('/auth/team/upload-image', 'Team\UploadImageAction');
+
+    Route::get('/auth/team/can-manage/{id}', 'Team\CanManageAction');
+    Route::post('/auth/team/change-role', 'Team\ChangeRoleAction');
+    Route::get('/auth/team/list-members/{team_id}', 'Team\ListMembersAction');
+    Route::get('/auth/team/delete-member/{id}', 'Team\DeleteMemberAction');
+    Route::post('/auth/team/invite/{id}', 'Team\InviteAction');
+    Route::get('/auth/team/delete-invite/{id}', 'Team\DeleteInviteAction');
+
 });

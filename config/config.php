@@ -2,6 +2,8 @@
 return [
     'send_welcome_mail' => true,
     'activation_required' => true,
+    'use_teams' => true,
+    'allowed_team_roles' => ['member'],
     'country_guesser_installed' => true,
 
     'mail_subjects' => [
