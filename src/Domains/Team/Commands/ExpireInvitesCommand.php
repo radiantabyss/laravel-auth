@@ -1,5 +1,5 @@
 <?php
-namespace RA\Auth\Domains\User\Commands;
+namespace RA\Auth\Domains\Team\Commands;
 
 use Illuminate\Console\Command;
 use RA\Auth\Services\ClassName;
