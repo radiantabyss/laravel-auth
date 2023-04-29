@@ -14,7 +14,7 @@ class DeleteInviteAction extends Action
             return 'Invite not found.';
         }
 
-        if ( \Gate::allows('manage-team', $item->team_id) ) {
+        if ( \Gate::denies('manage-team', $item->team_id) ) {
             return 'Sorry, you can\'t delete this invite.';
         }
 

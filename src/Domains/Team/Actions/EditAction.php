@@ -14,7 +14,7 @@ class EditAction extends Action
             return Response::error('Team not found.');
         }
 
-        if ( \Gate::allows('manage-team', $id) ) {
+        if ( \Gate::denies('manage-team', $id) ) {
             return Response::error('Sorry, you can\'t edit this team.');
         }
 

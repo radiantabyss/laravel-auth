@@ -6,7 +6,7 @@ use RA\Auth\Services\ClassName;
 class InviteValidator
 {
     public static function run($data, $id) {
-        if ( \Gate::allows('manage-team', $id) ) {
+        if ( \Gate::denies('manage-team', $id) ) {
             return 'Sorry, you can\'t invite members to this team.';
         }
 

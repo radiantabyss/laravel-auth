@@ -9,7 +9,7 @@ use RA\Auth\Services\ClassName;
 class ListMembersAction extends Action
 {
     public function run($team_id) {
-        if ( \Gate::allows('manage-team', $team_id) ) {
+        if ( \Gate::denies('manage-team', $team_id) ) {
             return Response::error('Sorry, you can\'t view this team\'s members.');
         }
 

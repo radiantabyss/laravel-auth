@@ -19,7 +19,7 @@ class ChangeRoleValidator
             return $validator->messages();
         }
 
-        if ( \Gate::allows('manage-team', $data['team_id']) ) {
+        if ( \Gate::denies('manage-team', $data['team_id']) ) {
             return 'Sorry, you can\'t change this team member.';
         }
 
