@@ -20,6 +20,7 @@ class CreateUserTable extends Migration
             $table->string('username')->nullable();
             $table->string('email', 100)->index()->nullable();
             $table->string('password')->nullable();
+            $table->string('name')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

@@ -6,11 +6,11 @@ use RA\Auth\Services\ClassName;
 class PatchTransformer
 {
     private static $allowed_fields = [
-        'username', 'email', 'current_password', 'password',
+        'username', 'email', 'current_password', 'password', 'name',
     ];
 
     private static $allowed_meta_fields = [
-        'public_name', 'first_name', 'last_name', 'profile_image_path',
+        'first_name', 'last_name', 'profile_image_path',
     ];
 
     public static function run($data) {
