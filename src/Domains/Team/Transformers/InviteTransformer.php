@@ -13,8 +13,8 @@ class InviteTransformer
         $emails = array_unique($matches[0]);
 
         //check if users with email is already a part of the team
-        $user_emails = keyBy(ClassName::Model('UserTeamMember')::select('email')
-            ->leftJoin('user', 'user.id', '=', 'user_team_member.user_id')
+        $user_emails = keyBy(ClassName::Model('TeamMember')::select('email')
+            ->leftJoin('user', 'user.id', '=', 'team_member.user_id')
             ->where('team_id', $id)
             ->whereIn('user.email', $emails)
             ->get(), 'email');

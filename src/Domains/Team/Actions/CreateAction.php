@@ -26,11 +26,11 @@ class CreateAction extends Action
         $data = $this->handleImageUpload($data);
 
         //insert
-        $item = ClassName::Model('UserTeam')::create($data);
+        $item = ClassName::Model('Team')::create($data);
 
         //insert meta keys
         foreach ( $meta as $key => $value ) {
-            ClassName::Model('UserTeamMeta')::create([
+            ClassName::Model('TeamMeta')::create([
                 'team_id' => $item->id,
                 'key' => $key,
                 'value' => $value,
@@ -38,7 +38,7 @@ class CreateAction extends Action
         }
 
         //insert user in own team
-        ClassName::Model('UserTeamMember')::create([
+        ClassName::Model('TeamMember')::create([
             'team_id' => $item->id,
             'user_id' => \Auth::user()->id,
             'role' => 'owner',

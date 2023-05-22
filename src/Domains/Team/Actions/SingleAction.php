@@ -8,7 +8,7 @@ use RA\Auth\Services\ClassName;
 class SingleAction extends Action
 {
     public function run($id) {
-        $item = ClassName::Model('UserTeam')::find($id);
+        $item = ClassName::Model('Team')::find($id);
 
         if ( !$item ) {
             return Response::error('Team not found.');

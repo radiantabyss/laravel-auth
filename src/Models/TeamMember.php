@@ -3,12 +3,12 @@ namespace RA\Auth\Models;
 
 use RA\Auth\Services\ClassName;
 
-class UserTeamMember extends Model
+class TeamMember extends Model
 {
-    protected $table = 'user_team_member';
+    protected $table = 'team_member';
 
     public function team() {
-        return $this->belongsTo(ClassName::Model('UserTeam'));
+        return $this->belongsTo(ClassName::Model('Team'));
     }
 
     public function user() {

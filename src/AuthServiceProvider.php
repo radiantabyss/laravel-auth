@@ -49,11 +49,7 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
 
-            if ( $user->team ) {
-                return in_array($user->team->role, ['owner', 'admin']);
-            }
-
-            return ClassName::Model('UserTeamMember')::where('team_id', $team_id)
+            return ClassName::Model('TeamMember')::where('team_id', $team_id)
                 ->where('user_id', $user->id)
                 ->whereIn('role', ['owner', 'admin'])
                 ->exists();

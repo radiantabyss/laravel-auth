@@ -6,7 +6,7 @@ use RA\Auth\Services\ClassName;
 class ListPresenter
 {
     public static function run($items) {
-        $items = ClassName::Model('UserTeam')::loadMetaForMany($items, ['image_path']);
+        $items = ClassName::Model('Team')::loadMetaForMany($items, ['image_path']);
 
         return $items;
     }

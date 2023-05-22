@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserInviteTable extends Migration
+class CreateTeamInviteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUserInviteTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_invite', function (Blueprint $table) {
+        Schema::create('team_invite', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('team_id')->index();
             $table->string('email');
@@ -31,6 +31,6 @@ class CreateUserInviteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_invite');
+        Schema::dropIfExists('team_invite');
     }
 }

@@ -25,11 +25,11 @@ class UpdateAction extends Action
         $data = $this->handleImageUpload($data);
 
         //update
-        ClassName::Model('UserTeam')::where('id', $id)->update($data);
+        ClassName::Model('Team')::where('id', $id)->update($data);
 
         //update meta keys
         foreach ( $meta as $key => $value ) {
-            ClassName::Model('UserTeamMeta')::updateOrCreate([
+            ClassName::Model('TeamMeta')::updateOrCreate([
                 'team_id' => $id,
                 'key' => $key,
                 'value' => $value,
@@ -37,7 +37,7 @@ class UpdateAction extends Action
         }
 
         //format for return
-        $item = ClassName::Model('UserTeam')::find($id);
+        $item = ClassName::Model('Team')::find($id);
         $item = ClassName::Presenter('Team\Presenter')::run($item);
 
         return Response::success(compact('item'));

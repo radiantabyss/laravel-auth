@@ -14,7 +14,7 @@ class ListMembersAction extends Action
         }
 
         //get query
-        $query = ClassName::Model('UserTeamMember')::select('user_id', 'role', 'created_at')
+        $query = ClassName::Model('TeamMember')::select('user_id', 'role', 'created_at')
             ->with('user:id,email')
             ->where('team_id', $team_id);
 

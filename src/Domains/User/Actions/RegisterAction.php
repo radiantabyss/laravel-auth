@@ -36,13 +36,13 @@ class RegisterAction extends Action
         }
 
         //create default team
-        $team = ClassName::Model('UserTeam')::create([
+        $team = ClassName::Model('Team')::create([
             'user_id' => $item->id,
             'name' => 'My Team',
         ]);
 
         //insert user in own team
-        ClassName::Model('UserTeamMember')::create([
+        ClassName::Model('TeamMember')::create([
             'team_id' => $team->id,
             'user_id' => $item->id,
             'role' => 'owner',

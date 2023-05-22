@@ -8,7 +8,7 @@ use RA\Auth\Services\ClassName;
 class CanManageAction extends Action
 {
     public function run($id) {
-        $can_manage = ClassName::Model('UserTeamMember')::where('team_id', $id)
+        $can_manage = ClassName::Model('TeamMember')::where('team_id', $id)
             ->where('user_id', \Auth::user()->id)
             ->where('role', 'owner')
             ->exists();

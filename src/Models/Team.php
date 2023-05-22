@@ -3,16 +3,16 @@ namespace RA\Auth\Models;
 
 use RA\Auth\Services\ClassName;
 
-class UserTeam extends Model
+class Team extends Model
 {
-    protected $table = 'user_team';
+    protected $table = 'team';
 
     public function user() {
         return $this->belongsTo(ClassName::Model('User'));
     }
 
     public function loadMeta($keys = []) {
-        $metas = ClassName::Model('UserTeamMeta')::where('team_id', $this->id)->get();
+        $metas = ClassName::Model('TeamMeta')::where('team_id', $this->id)->get();
         $item_meta = [];
 
         foreach ( $metas as $meta ) {
@@ -32,7 +32,7 @@ class UserTeam extends Model
             return $items;
         }
 
-        $grouped_metas = ClassName::Model('UserTeamMeta')::whereIn('team_id', pluck($items))->get()->groupBy('team_id');
+        $grouped_metas = ClassName::Model('TeamMeta')::whereIn('team_id', pluck($items))->get()->groupBy('team_id');
 
         foreach ( $items as $item ) {
             $metas = $grouped_metas[$item->id] ?? [];

@@ -16,7 +16,7 @@ class ChangeRoleAction extends Action
             return Response::error($validation);
         }
 
-        ClassName::Model('UserTeamMember')::where('id', $data['id'])->update([
+        ClassName::Model('TeamMember')::where('id', $data['id'])->update([
             'role' => $data['role']
         ]);
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTeamTable extends Migration
+class CreateTeamMetaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateUserTeamTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_team', function (Blueprint $table) {
+        Schema::create('team_meta', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uuid');
-            $table->integer('user_id')->index();
-            $table->string('name');
+            $table->integer('team_id')->index();
+            $table->string('key', 100);
+            $table->string('value', 500)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateUserTeamTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_team');
+        Schema::dropIfExists('team_meta');
     }
 }

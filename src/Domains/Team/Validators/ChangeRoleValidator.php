@@ -23,7 +23,7 @@ class ChangeRoleValidator
             return 'Sorry, you can\'t change this team member.';
         }
 
-        $item = ClassName::Model('UserTeamMember')::where('id', $data['id'])
+        $item = ClassName::Model('TeamMember')::where('id', $data['id'])
             ->where('team_id', $data['team_id'])
             ->where('role', '!=', 'owner')
             ->first();

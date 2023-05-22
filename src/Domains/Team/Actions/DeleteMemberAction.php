@@ -8,7 +8,7 @@ use RA\Auth\Services\ClassName;
 class DeleteMemberAction extends Action
 {
     public function run($id) {
-        $item = ClassName::Model('UserTeamMember')::find($id);
+        $item = ClassName::Model('TeamMember')::find($id);
 
         //validate request
         $validation = ClassName::Validator('Team\DeleteMemberValidator')::run($item);

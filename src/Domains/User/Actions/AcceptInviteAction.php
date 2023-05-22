@@ -45,7 +45,7 @@ class AcceptInviteAction extends Action
         $invite = ClassName::Model('UserInvite')::where('code', $data['code'])->first();
 
         //insert user in team
-        ClassName::Model('UserTeamMember')::create([
+        ClassName::Model('TeamMember')::create([
             'team_id' => $invite->team_id,
             'user_id' => $item->id,
             'role' => $invite->role,

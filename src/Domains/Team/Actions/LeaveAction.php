@@ -8,14 +8,14 @@ use RA\Auth\Services\ClassName;
 class LeaveAction extends Action
 {
     public function run($id) {
-        $item = ClassName::Model('UserTeam')::find($id);
+        $item = ClassName::Model('Team')::find($id);
 
         if ( !$item ) {
             return Response::error('Team not found.');
         }
 
         //leave team
-        ClassName::Model('UserTeamMember')::where('team_id', $id)
+        ClassName::Model('TeamMember')::where('team_id', $id)
             ->where('user_id', \Auth::user()->id)
             ->delete();
 
@@ -30,7 +30,7 @@ class LeaveAction extends Action
             return null;
         }
 
-        $team_member = ClassName::Model('UserTeamMember')::where('user_id', \Auth::user()->id)->first();
+        $team_member = ClassName::Model('TeamMember')::where('user_id', \Auth::user()->id)->first();
 
         if ( $team_member ) {
             $team_id = $team_member->team_id;
@@ -38,13 +38,13 @@ class LeaveAction extends Action
         //user is not part of any teams, create a default one
         else {
             //create default team
-            $team = ClassName::Model('UserTeam')::create([
+            $team = ClassName::Model('Team')::create([
                 'user_id' => \Auth::user()->id,
                 'name' => 'My Team',
             ]);
 
             //insert user in own team
-            ClassName::Model('UserTeamMember')::create([
+            ClassName::Model('TeamMember')::create([
                 'team_id' => $team->id,
                 'user_id' => \Auth::user()->id,
                 'role' => 'owner',

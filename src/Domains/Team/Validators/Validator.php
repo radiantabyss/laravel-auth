@@ -8,7 +8,7 @@ class Validator
     public static function run($data, $id = false) {
         //check if item exists
         if ( $id ) {
-            $item = ClassName::Model('UserTeam')::find($id);
+            $item = ClassName::Model('Team')::find($id);
             if ( !$item ) {
                 return 'Team not found.';
             }
