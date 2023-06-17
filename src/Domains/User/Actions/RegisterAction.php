@@ -38,6 +38,7 @@ class RegisterAction extends Action
         //create default team
         $team = ClassName::Model('Team')::create([
             'user_id' => $item->id,
+            'uuid' => \Str::uuid(),
             'name' => 'My Team',
         ]);
 
