@@ -19,7 +19,6 @@ Route::group(['middleware' => ['RA\Auth\Logged']], function() {
     Route::post('/auth/user/upload-profile-image', 'User\UploadProfileImageAction');
     Route::options('/auth/user/upload-profile-image', 'User\UploadProfileImageAction');
 
-
     Route::get('/auth/team', 'Team\ListAction');
     Route::post('/auth/team/create', 'Team\CreateAction');
     Route::post('/auth/team/single/{id}', 'Team\SingleAction');
@@ -36,6 +35,6 @@ Route::group(['middleware' => ['RA\Auth\Logged']], function() {
     Route::get('/auth/team/list-members/{team_id}', 'Team\ListMembersAction');
     Route::get('/auth/team/delete-member/{id}', 'Team\DeleteMemberAction');
     Route::post('/auth/team/invite/{id}', 'Team\InviteAction');
+    Route::post('/auth/team/resend-invite/{invite_id}', 'Team\ResendInviteAction');
     Route::get('/auth/team/delete-invite/{id}', 'Team\DeleteInviteAction');
-
 });

@@ -3,16 +3,12 @@ namespace RA\Auth\Services;
 
 class SetUser
 {
-    private static $request;
-
     public static function run($request) {
-        self::$request = $request;
-
         //get jwt token from request
-        $payload = self::$request->get(config('jwt.input'));
+        $payload = $request->get(config('jwt.input'));
 
         //remove jwt token from request
-        self::$request->query->remove(config('jwt.input'));
+        $request->query->remove(config('jwt.input'));
 
         if ( !$payload ) {
             return 'JWT Token is required.';

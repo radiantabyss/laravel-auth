@@ -21,19 +21,21 @@ class InviteAction extends Action
         //save to db
         $data = ClassName::Transformer('Team\InviteTransformer')::run($data, $id);
 
-        $items = [];
+        $item = ClassName::Model('Team')::find($id);
+
+        $invites = [];
         foreach ( $data as $data_item ) {
-            $item = ClassName::Model('UserInvite')::create($data_item);
+            $invite = ClassName::Model('TeamInvite')::create($data_item);
 
             //send mail
-            MailSender::run(InviteMail::class, $item->email, [
-                'team' => \Auth::user()->team,
-                'invite' => $item,
+            MailSender::run(InviteMail::class, $invite->email, [
+                'team' => $item,
+                'invite' => $invite,
             ]);
 
-            $items[] = $item;
+            $invites[] = $invite;
         }
 
-        return Response::success(compact('items'));
+        return Response::success(compact('invites'));
     }
 }

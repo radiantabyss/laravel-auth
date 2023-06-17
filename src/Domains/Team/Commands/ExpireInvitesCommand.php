@@ -10,6 +10,6 @@ class ExpireInvitesCommand extends Command
     protected $description = 'Expires team invites.';
 
     public function handle() {
-        ClassName::Model('UserInvite')::where('expires_at', '<', date('Y-m-d H:i:s'))->delete();
+        ClassName::Model('TeamInvite')::where('expires_at', '<', date('Y-m-d H:i:s'))->delete();
     }
 }

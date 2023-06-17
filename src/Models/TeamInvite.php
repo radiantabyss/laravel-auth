@@ -3,9 +3,9 @@ namespace RA\Auth\Models;
 
 use RA\Auth\Services\ClassName;
 
-class UserInvite extends Model
+class TeamInvite extends Model
 {
-    protected $table = 'user_invite';
+    protected $table = 'team_invite';
 
     protected $hidden = [
         'code',
@@ -13,5 +13,9 @@ class UserInvite extends Model
 
     public function user() {
         return $this->belongsTo(ClassName::Model('User'));
+    }
+
+    public function team() {
+        return $this->belongsTo(ClassName::Model('Team'));
     }
 }

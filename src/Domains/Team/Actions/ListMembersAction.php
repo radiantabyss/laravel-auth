@@ -14,8 +14,8 @@ class ListMembersAction extends Action
         }
 
         //get query
-        $query = ClassName::Model('TeamMember')::select('user_id', 'role', 'created_at')
-            ->with('user:id,email')
+        $query = ClassName::Model('TeamMember')::select('id', 'user_id', 'role', 'created_at')
+            ->with('user:id,email,name')
             ->where('team_id', $team_id);
 
         //apply filters
@@ -29,7 +29,7 @@ class ListMembersAction extends Action
         $pages = $paginated->lastPage();
 
         //get invites
-        $invites = ClassName::Model('UserInvite')::where('team_id', $team_id)->get();
+        $invites = ClassName::Model('TeamInvite')::where('team_id', $team_id)->get();
 
         return Response::success(compact('items', 'total', 'pages', 'invites'));
     }

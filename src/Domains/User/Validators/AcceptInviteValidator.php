@@ -7,7 +7,7 @@ class AcceptInviteValidator
 {
     public static function run($data) {
         //check if invite exists and not expired
-        $invite = ClassName::Model('UserInvite')::where('code', $data['code'])
+        $invite = ClassName::Model('TeamInvite')::where('code', $data['code'])
             ->where('expires_at', '>=', date('Y-m-d H:i:s'))
             ->first();
 

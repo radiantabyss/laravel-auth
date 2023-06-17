@@ -44,6 +44,17 @@ class AuthServiceProvider extends ServiceProvider
     }
 
     private function registerGates() {
+        \Gate::define('owns-team', function($user, $team_id) {
+            if ( $user->type == 'super_admin' ) {
+                return true;
+            }
+
+            return ClassName::Model('TeamMember')::where('team_id', $team_id)
+                ->where('user_id', $user->id)
+                ->where('role', 'owner')
+                ->exists();
+        });
+
         \Gate::define('manage-team', function($user, $team_id) {
             if ( $user->type == 'super_admin' ) {
                 return true;

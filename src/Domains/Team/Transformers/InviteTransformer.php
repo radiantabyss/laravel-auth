@@ -20,7 +20,7 @@ class InviteTransformer
             ->get(), 'email');
 
         //check if users with email were already invited
-        $invited_emails = keyBy(ClassName::Model('UserInvite')::where('team_id', $id)
+        $invited_emails = keyBy(ClassName::Model('TeamInvite')::where('team_id', $id)
             ->whereIn('email', $emails)
             ->get(), 'email');
 

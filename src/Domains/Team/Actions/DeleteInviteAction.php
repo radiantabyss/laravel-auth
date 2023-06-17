@@ -8,7 +8,7 @@ use RA\Auth\Services\ClassName;
 class DeleteInviteAction extends Action
 {
     public function run($id) {
-        $item = ClassName::Model('UserInvite')::find($id);
+        $item = ClassName::Model('TeamInvite')::find($id);
 
         if ( !$item ) {
             return 'Invite not found.';
