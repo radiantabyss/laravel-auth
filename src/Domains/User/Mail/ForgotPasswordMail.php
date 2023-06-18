@@ -8,11 +8,11 @@ class ForgotPasswordMail extends Mail
     public function build() {
         $this->subject(config('ra-auth.mail_subjects.forgot-password'));
 
-        if ( \View::exists('Auth::forgot-password') ) {
-            $this->view('Auth::forgot-password', $this->params);
+        if ( \View::exists('Auth.User::forgot-password') ) {
+            $this->view('Auth.User::forgot-password', $this->params);
         }
         else {
-            $this->view('RA.Auth::forgot-password', $this->params);
+            $this->view('RA.Auth.User::forgot-password', $this->params);
         }
 
         return $this;

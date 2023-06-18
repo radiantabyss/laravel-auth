@@ -8,11 +8,11 @@ class WelcomeMail extends Mail
     public function build() {
         $this->subject(config('ra-auth.mail_subjects.welcome'));
 
-        if ( \View::exists('Auth::welcome') ) {
-            $this->view('Auth::welcome', $this->params);
+        if ( \View::exists('Auth.User::welcome') ) {
+            $this->view('Auth.User::welcome', $this->params);
         }
         else {
-            $this->view('RA.Auth::welcome', $this->params);
+            $this->view('RA.Auth.User::welcome', $this->params);
         }
 
         return $this;
