@@ -31,6 +31,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         }
 
         ClassName::Model('UserLog')::create([
+			'team_id' => $this->team->id,
             'user_id' => $this->id,
             'type' => $type,
             'message' => \Str::limit($message, 500),
