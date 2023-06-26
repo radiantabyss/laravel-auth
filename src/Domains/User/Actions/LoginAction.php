@@ -18,12 +18,13 @@ class LoginAction extends Action
         }
 
         $item = ClassName::Model('User')::where('email', trim($data['email']))->first();
-        $item->log('login', date('Y-m-d H:i:s'));
-
         $item = ClassName::Presenter('User\Presenter')::run($item);
 
         //generate jwt token
         $jwt_token = Jwt::generate(ClassName::Presenter('User\JwtPresenter')::run(clone $item));
+
+        //log event
+        $item->log('login', date('Y-m-d H:i:s'));
 
         return Response::success(compact('item', 'jwt_token'));
     }

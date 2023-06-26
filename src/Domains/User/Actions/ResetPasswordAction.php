@@ -26,12 +26,12 @@ class ResetPasswordAction extends Action
             'password' => \Hash::make($data['password']),
         ]);
 
-        //log event
-        $item->log('reset_password', 'Reset password');
-
         //create jwt token
         $item = ClassName::Presenter('User\Presenter')::run($item);
         $jwt_token = Jwt::generate(ClassName::Presenter('User\JwtPresenter')::run(clone $item));
+
+        //log event
+        $item->log('reset_password', 'Reset password');
 
         return Response::success(compact('item', 'jwt_token'));
     }
