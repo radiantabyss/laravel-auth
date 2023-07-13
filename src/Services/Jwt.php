@@ -6,6 +6,10 @@ use Firebase\JWT\JWT as FirebaseJwt;
 class Jwt
 {
     public static function generate($payload) {
+        if ( !config('jwt.secret') ) {
+            throw 'JWT Secret cannot be null.';
+        }
+
         return FirebaseJwt::encode($payload, config('jwt.secret'), config('jwt.algorithm'));
     }
 
