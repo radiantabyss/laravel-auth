@@ -4,7 +4,7 @@ namespace RA\Auth\Domains\User\Actions;
 use Illuminate\Routing\Controller as Action;
 use RA\Core\MailSender;
 use RA\Core\Response;
-use RA\Auth\Mail\ForgotPasswordMail;
+use RA\Auth\User\Mail\ForgotPasswordMail;
 use RA\Auth\Services\ClassName;
 
 class ForgotPasswordAction extends Action
