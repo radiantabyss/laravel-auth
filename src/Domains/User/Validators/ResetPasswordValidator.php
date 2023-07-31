@@ -30,7 +30,7 @@ class ResetPasswordValidator
         }
 
         //check user
-        $item = ClassName::Model('User')::find('id', $code->user_id);
+        $item = ClassName::Model('User')::find($code->user_id);
 
         if ( !$item ) {
             return 'Reset Code combination is invalid or has expired.';
