@@ -8,7 +8,11 @@ use RA\Auth\Services\ClassName;
 class EditAction extends Action
 {
     public function run($id) {
-        $item = ClassName::Model('Team')::find($id);
+        $item = ClassName::Model('Team')::select('team.*', 'team_member.role', 'team_member.created_at as joined_at')
+            ->leftJoin('team_member', 'team_member.team_id', '=', 'team.id')
+            ->where('team.id', $id)
+            ->where('team_member.user_id', \Auth::user()->id)
+            ->first();
 
         if ( !$item ) {
             return Response::error('Team not found.');
