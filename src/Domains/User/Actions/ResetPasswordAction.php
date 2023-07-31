@@ -30,8 +30,12 @@ class ResetPasswordAction extends Action
         $item = ClassName::Presenter('User\Presenter')::run($item);
         $jwt_token = Jwt::generate(ClassName::Presenter('User\JwtPresenter')::run(clone $item));
 
+        //delete code
+        $code->delete();
+        
         //log event
         $item->log('reset_password', 'Reset password');
+
 
         return Response::success(compact('item', 'jwt_token'));
     }
