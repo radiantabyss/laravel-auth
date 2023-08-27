@@ -18,7 +18,6 @@ class CreateTeamMetaTable extends Migration
             $table->integer('team_id')->index();
             $table->string('key', 100);
             $table->string('value', 500)->nullable();
-            $table->timestamps();
         });
     }
 
