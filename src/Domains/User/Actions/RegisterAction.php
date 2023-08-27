@@ -4,7 +4,6 @@ namespace RA\Auth\Domains\User\Actions;
 use Illuminate\Routing\Controller as Action;
 use RA\Core\MailSender;
 use RA\Core\Response;
-use RA\Auth\Domains\User\Mail\WelcomeMail;
 use RA\Auth\Services\ClassName;
 use RA\Auth\Services\Jwt;
 
@@ -64,7 +63,7 @@ class RegisterAction extends Action
 
         //send welcome mail
         if ( config('ra-auth.send_welcome_mail') ) {
-            MailSender::send(WelcomeMail::class, $item->email, compact('item', 'code'));
+            MailSender::send(ClassName::Mail('User\WelcomeMail'), $item->email, compact('item', 'code'));
         }
 
         //format

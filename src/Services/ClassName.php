@@ -46,4 +46,16 @@ class ClassName
 
         return '\RA\Auth\Domains\\'.$namespace.'\\Validators\\'.$name;
     }
+
+    public static function Mail($name) {
+        $exp = explode('\\', $name);
+        $namespace = $exp[0];
+        $name = $exp[1];
+
+        if ( class_exists('\App\Domains\Auth\\'.$namespace.'\\Mail\\'.$name) ) {
+            return '\App\Domains\Auth\\'.$namespace.'\\Mail\\'.$name;
+        }
+
+        return '\RA\Auth\Domains\\'.$namespace.'\\Mail\\'.$name;
+    }
 }

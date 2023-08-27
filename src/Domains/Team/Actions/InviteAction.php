@@ -5,7 +5,6 @@ use Illuminate\Routing\Controller as Action;
 use RA\Core\Response;
 use RA\Core\MailSender;
 use RA\Auth\Services\ClassName;
-use RA\Auth\Domains\Team\Mail\InviteMail;
 
 class InviteAction extends Action
 {
@@ -28,7 +27,7 @@ class InviteAction extends Action
             $invite = ClassName::Model('TeamInvite')::create($data_item);
 
             //send mail
-            MailSender::run(InviteMail::class, $invite->email, [
+            MailSender::run(ClassName::Mail('Team\InviteMail')::class, $invite->email, [
                 'team' => $item,
                 'invite' => $invite,
             ]);

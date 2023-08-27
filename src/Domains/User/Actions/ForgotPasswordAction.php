@@ -4,7 +4,6 @@ namespace RA\Auth\Domains\User\Actions;
 use Illuminate\Routing\Controller as Action;
 use RA\Core\MailSender;
 use RA\Core\Response;
-use RA\Auth\Domains\User\Mail\ForgotPasswordMail;
 use RA\Auth\Services\ClassName;
 
 class ForgotPasswordAction extends Action
@@ -30,7 +29,7 @@ class ForgotPasswordAction extends Action
         ]);
 
         //send mail
-        MailSender::send(ForgotPasswordMail::class, $item->email, compact('item', 'code'));
+        MailSender::send(ClassName::Mail('User\ForgotPasswordMail'), $item->email, compact('item', 'code'));
 
         return Response::success();
     }
