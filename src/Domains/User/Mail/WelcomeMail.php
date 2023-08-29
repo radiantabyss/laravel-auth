@@ -6,14 +6,11 @@ use RA\Core\Mail;
 class WelcomeMail extends Mail
 {
     public function build() {
-        $this->subject(config('ra-auth.mail_subjects.welcome'));
+        $subject = str_replace('{{app_name}}', config('app.name'), config('ra-auth.mail_subjects.welcome'));
+        $this->subject($subject);
 
-        if ( \View::exists('Auth.User::welcome') ) {
-            $this->view('Auth.User::welcome', $this->params);
-        }
-        else {
-            $this->view('RA.Auth.User::welcome', $this->params);
-        }
+        $view = \View::exists('Auth.User::welcome') ? 'Auth.User::welcome' : 'RA.Auth.User::welcome';
+        $this->view($view, $this->params);
 
         return $this;
     }

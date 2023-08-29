@@ -6,14 +6,11 @@ use RA\Core\Mail;
 class ForgotPasswordMail extends Mail
 {
     public function build() {
-        $this->subject(config('ra-auth.mail_subjects.forgot-password'));
+        $subject = str_replace('{{app_name}}', config('app.name'), config('ra-auth.mail_subjects.forgot-password'));
+        $this->subject($subject);
 
-        if ( \View::exists('Auth.User::forgot-password') ) {
-            $this->view('Auth.User::forgot-password', $this->params);
-        }
-        else {
-            $this->view('RA.Auth.User::forgot-password', $this->params);
-        }
+        $view = \View::exists('Auth.User::forgot-password') ? 'Auth.User::forgot-password' : 'RA.Auth.User::forgot-password';
+        $this->view($view, $this->params);
 
         return $this;
     }

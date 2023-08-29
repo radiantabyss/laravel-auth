@@ -6,14 +6,13 @@ use RA\Core\Mail;
 class InviteMail extends Mail
 {
     public function build() {
-        $this->subject(config('ra-auth.mail_subjects.invite'));
+        $subject = str_replace('{{app_name}}', config('app.name'), config('ra-auth.mail_subjects.invite'));
+        $subject = str_replace('{{team_name}}', $this->params['team']->name, $subject);
+        $this->subject($subject);
 
-        if ( \View::exists('Auth.Team::invite') ) {
-            $this->view('Auth.Team::invite', $this->params);
-        }
-        else {
-            $this->view('RA.Auth.Team::invite', $this->params);
-        }
+        $this->subject(config('ra-auth.mail_subjects.invite'));
+        $view = \View::exists('Auth.Team::invite') ? 'Auth.Team::invite' : 'RA.Auth.Team::invite';
+        $this->view($view, $this->params);
 
         return $this;
     }
