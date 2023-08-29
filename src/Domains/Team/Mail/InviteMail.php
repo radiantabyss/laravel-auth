@@ -10,7 +10,6 @@ class InviteMail extends Mail
         $subject = str_replace('{{team_name}}', $this->params['team']->name, $subject);
         $this->subject($subject);
 
-        $this->subject(config('ra-auth.mail_subjects.invite'));
         $view = \View::exists('Auth.Team::invite') ? 'Auth.Team::invite' : 'RA.Auth.Team::invite';
         $this->view($view, $this->params);
 
