@@ -1,10 +1,10 @@
 <?php
-namespace RA\Auth\Domains\Team\Actions;
+namespace Lumi\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use RA\Core\Response;
-use RA\Core\Filter;
-use RA\Auth\Services\ClassName;
+use Lumi\Core\Response;
+use Lumi\Core\Filter;
+use Lumi\Auth\Services\ClassName;
 
 class ListMembersAction extends Action
 {

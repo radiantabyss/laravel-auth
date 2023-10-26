@@ -1,7 +1,7 @@
 <?php
-namespace RA\Auth\Domains\Team\Validators;
+namespace Lumi\Auth\Domains\Team\Validators;
 
-use RA\Auth\Services\ClassName;
+use Lumi\Auth\Services\ClassName;
 
 class Validator
 {

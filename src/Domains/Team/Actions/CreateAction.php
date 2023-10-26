@@ -1,10 +1,10 @@
 <?php
-namespace RA\Auth\Domains\Team\Actions;
+namespace Lumi\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use RA\Core\Response;
-use RA\Auth\Services\ClassName;
-use RA\Auth\Services\Jwt;
+use Lumi\Core\Response;
+use Lumi\Auth\Services\ClassName;
+use Lumi\Auth\Services\Jwt;
 
 class CreateAction extends Action
 {

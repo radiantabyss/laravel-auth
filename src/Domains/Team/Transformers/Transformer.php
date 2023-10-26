@@ -1,5 +1,5 @@
 <?php
-namespace RA\Auth\Domains\Team\Transformers;
+namespace Lumi\Auth\Domains\Team\Transformers;
 
 class Transformer
 {

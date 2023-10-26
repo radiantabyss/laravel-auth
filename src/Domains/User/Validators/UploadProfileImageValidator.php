@@ -1,5 +1,5 @@
 <?php
-namespace RA\Auth\Domains\User\Validators;
+namespace Lumi\Auth\Domains\User\Validators;
 
 class UploadProfileImageValidator
 {

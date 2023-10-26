@@ -1,9 +1,9 @@
 <?php
-namespace RA\Auth\Domains\Team\Actions;
+namespace Lumi\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use RA\Core\Response;
-use RA\Auth\Services\ClassName;
+use Lumi\Core\Response;
+use Lumi\Auth\Services\ClassName;
 
 class UpdateAction extends Action
 {

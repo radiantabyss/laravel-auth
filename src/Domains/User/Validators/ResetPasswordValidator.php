@@ -1,7 +1,7 @@
 <?php
-namespace RA\Auth\Domains\User\Validators;
+namespace Lumi\Auth\Domains\User\Validators;
 
-use RA\Auth\Services\ClassName;
+use Lumi\Auth\Services\ClassName;
 
 class ResetPasswordValidator
 {

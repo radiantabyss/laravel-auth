@@ -1,7 +1,7 @@
 <?php
-namespace RA\Auth\Models;
+namespace Lumi\Auth\Models;
 
-use RA\Auth\Services\ClassName;
+use Lumi\Auth\Services\ClassName;
 
 class TeamMember extends Model
 {

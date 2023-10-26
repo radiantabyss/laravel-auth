@@ -1,8 +1,8 @@
 <?php
-namespace RA\Auth;
+namespace Lumi\Auth;
 
 use Illuminate\Support\ServiceProvider;
-use RA\Auth\Services\ClassName;
+use Lumi\Auth\Services\ClassName;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -15,8 +15,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->enablePublishing();
 
         //register view domains
-        \View::addNamespace('RA.Auth.Team', __DIR__.'/Domains/Team/Mail/views');
-        \View::addNamespace('RA.Auth.User', __DIR__.'/Domains/User/Mail/views');
+        \View::addNamespace('Lumi.Auth.Team', __DIR__.'/Domains/Team/Mail/views');
+        \View::addNamespace('Lumi.Auth.User', __DIR__.'/Domains/User/Mail/views');
     }
 
     /**
@@ -36,11 +36,11 @@ class AuthServiceProvider extends ServiceProvider
 
     private function registerMiddleware() {
         $router = $this->app['router'];
-        $router->aliasMiddleware('RA\Auth\Logged', \RA\Auth\Http\Middleware\LoggedMiddleware::class);
-        $router->aliasMiddleware('RA\Auth\NotLogged', \RA\Auth\Http\Middleware\NotLoggedMiddleware::class);
-        $router->aliasMiddleware('RA\Auth\SetUser', \RA\Auth\Http\Middleware\SetUserMiddleware::class);
-        $router->aliasMiddleware('RA\Auth\TeamRole', \RA\Auth\Http\Middleware\TeamRoleMiddleware::class);
-        $router->aliasMiddleware('RA\Auth\UserType', \RA\Auth\Http\Middleware\UserTypeMiddleware::class);
+        $router->aliasMiddleware('Lumi\Auth\Logged', \Lumi\Auth\Http\Middleware\LoggedMiddleware::class);
+        $router->aliasMiddleware('Lumi\Auth\NotLogged', \Lumi\Auth\Http\Middleware\NotLoggedMiddleware::class);
+        $router->aliasMiddleware('Lumi\Auth\SetUser', \Lumi\Auth\Http\Middleware\SetUserMiddleware::class);
+        $router->aliasMiddleware('Lumi\Auth\TeamRole', \Lumi\Auth\Http\Middleware\TeamRoleMiddleware::class);
+        $router->aliasMiddleware('Lumi\Auth\UserType', \Lumi\Auth\Http\Middleware\UserTypeMiddleware::class);
     }
 
     private function registerGates() {

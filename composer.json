@@ -1,15 +1,15 @@
 {
-    "name": "radiantabyss/packages-auth",
-    "description": "RadiantAbyss Package: Auth",
+    "name": "radiantabyss/lumi-laravel-auth",
+    "description": "Lumi Laravel Auth",
     "keywords": [
         "ra"
     ],
-    "homepage": "https://packages.radiantabyss.com/auth",
+    "homepage": "https://lumi.radiantabyss.com/laravel-auth",
     "license": "proprietary",
     "type": "library",
     "authors": [
         {
-            "name": "RA",
+            "name": "Robert",
             "email": "robert@radiantabyss.com",
             "role": "owner"
         }
@@ -20,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "RA\\Auth\\": "src"
+            "Lumi\\Auth\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "RA\\Auth\\Tests\\": "tests"
+            "Lumi\\Auth\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -38,7 +38,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "RA\\Auth\\AuthServiceProvider"
+                "Lumi\\Auth\\AuthServiceProvider"
             ]
         }
     }

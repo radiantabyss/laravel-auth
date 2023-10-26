@@ -1,8 +1,8 @@
 <?php
-namespace RA\Auth\Http\Middleware;
+namespace Lumi\Auth\Http\Middleware;
 
-use RA\Core\Response;
-use RA\Auth\Services\SetUser;
+use Lumi\Core\Response;
+use Lumi\Auth\Services\SetUser;
 
 class LoggedMiddleware
 {

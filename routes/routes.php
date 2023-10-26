@@ -1,8 +1,8 @@
 <?php
-use RA\Core\Route;
+use Lumi\Core\Route;
 
 //no auth
-Route::group(['middleware' => ['RA\Auth\NotLogged']], function() {
+Route::group(['middleware' => ['Lumi\Auth\NotLogged']], function() {
     Route::post('/auth/user/register', 'User\RegisterAction');
     Route::post('/auth/user/forgot-password', 'User\ForgotPasswordAction');
     Route::post('/auth/user/reset-password', 'User\ResetPasswordAction');
@@ -13,7 +13,7 @@ Route::group(['middleware' => ['RA\Auth\NotLogged']], function() {
 });
 
 //with auth
-Route::group(['middleware' => ['RA\Auth\Logged']], function() {
+Route::group(['middleware' => ['Lumi\Auth\Logged']], function() {
     Route::get('/auth/user/get', 'User\GetAction');
     Route::post('/auth/user/patch', 'User\PatchAction');
     Route::post('/auth/user/upload-profile-image', 'User\UploadProfileImageAction');

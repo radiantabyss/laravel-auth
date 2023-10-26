@@ -1,8 +1,8 @@
 <?php
-namespace RA\Auth\Domains\User\Commands;
+namespace Lumi\Auth\Domains\User\Commands;
 
 use Illuminate\Console\Command;
-use RA\Auth\Services\ClassName;
+use Lumi\Auth\Services\ClassName;
 
 class ExpireCodesCommand extends Command
 {

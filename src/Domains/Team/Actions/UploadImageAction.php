@@ -1,10 +1,10 @@
 <?php
-namespace RA\Auth\Domains\Team\Actions;
+namespace Lumi\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use RA\Core\Response;
+use Lumi\Core\Response;
 use Intervention\Image\ImageManagerStatic as Image;
-use RA\Auth\Services\ClassName;
+use Lumi\Auth\Services\ClassName;
 
 class UploadImageAction extends Action
 {

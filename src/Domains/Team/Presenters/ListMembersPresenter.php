@@ -1,7 +1,7 @@
 <?php
-namespace RA\Auth\Domains\Team\Presenters;
+namespace Lumi\Auth\Domains\Team\Presenters;
 
-use RA\Auth\Services\ClassName;
+use Lumi\Auth\Services\ClassName;
 
 class ListMembersPresenter
 {

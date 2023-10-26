@@ -1,7 +1,7 @@
 <?php
-namespace RA\Auth\Domains\User\Mail;
+namespace Lumi\Auth\Domains\User\Mail;
 
-use RA\Core\Mail;
+use Lumi\Core\Mail;
 
 class WelcomeMail extends Mail
 {
@@ -9,7 +9,7 @@ class WelcomeMail extends Mail
         $subject = str_replace('{{app_name}}', config('app.name'), config('ra-auth.mail_subjects.welcome'));
         $this->subject($subject);
 
-        $view = \View::exists('Auth.User::welcome') ? 'Auth.User::welcome' : 'RA.Auth.User::welcome';
+        $view = \View::exists('Auth.User::welcome') ? 'Auth.User::welcome' : 'Lumi.Auth.User::welcome';
         $this->view($view, $this->params);
 
         return $this;

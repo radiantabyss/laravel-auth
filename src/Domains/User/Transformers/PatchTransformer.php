@@ -1,7 +1,7 @@
 <?php
-namespace RA\Auth\Domains\User\Transformers;
+namespace Lumi\Auth\Domains\User\Transformers;
 
-use RA\Auth\Services\ClassName;
+use Lumi\Auth\Services\ClassName;
 
 class PatchTransformer
 {

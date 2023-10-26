@@ -1,11 +1,11 @@
 <?php
-namespace RA\Auth\Domains\Team\Actions;
+namespace Lumi\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use RA\Core\Response;
-use RA\Core\MailSender;
-use RA\Auth\Services\ClassName;
-use RA\Auth\Domains\Team\Mail\InviteMail;
+use Lumi\Core\Response;
+use Lumi\Core\MailSender;
+use Lumi\Auth\Services\ClassName;
+use Lumi\Auth\Domains\Team\Mail\InviteMail;
 
 class ResendInviteAction extends Action
 {

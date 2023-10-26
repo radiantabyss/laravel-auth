@@ -1,8 +1,8 @@
 <?php
-namespace RA\Auth\Domains\Team\Commands;
+namespace Lumi\Auth\Domains\Team\Commands;
 
 use Illuminate\Console\Command;
-use RA\Auth\Services\ClassName;
+use Lumi\Auth\Services\ClassName;
 
 class ExpireInvitesCommand extends Command
 {

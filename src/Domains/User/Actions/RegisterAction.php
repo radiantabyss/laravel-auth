@@ -1,11 +1,11 @@
 <?php
-namespace RA\Auth\Domains\User\Actions;
+namespace Lumi\Auth\Domains\User\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use RA\Core\MailSender;
-use RA\Core\Response;
-use RA\Auth\Services\ClassName;
-use RA\Auth\Services\Jwt;
+use Lumi\Core\MailSender;
+use Lumi\Core\Response;
+use Lumi\Auth\Services\ClassName;
+use Lumi\Auth\Services\Jwt;
 
 class RegisterAction extends Action
 {

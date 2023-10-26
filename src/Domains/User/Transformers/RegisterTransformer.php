@@ -1,5 +1,5 @@
 <?php
-namespace RA\Auth\Domains\User\Transformers;
+namespace Lumi\Auth\Domains\User\Transformers;
 
 class RegisterTransformer
 {

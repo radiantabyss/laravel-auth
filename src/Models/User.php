@@ -1,11 +1,11 @@
 <?php
-namespace RA\Auth\Models;
+namespace Lumi\Auth\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use RA\Auth\Services\ClassName;
+use Lumi\Auth\Services\ClassName;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {

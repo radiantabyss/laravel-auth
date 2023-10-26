@@ -1,5 +1,5 @@
 <?php
-namespace RA\Auth\Services;
+namespace Lumi\Auth\Services;
 
 use Firebase\JWT\JWT as FirebaseJwt;
 

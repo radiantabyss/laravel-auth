@@ -1,7 +1,7 @@
 <?php
-namespace RA\Auth\Http\Middleware;
+namespace Lumi\Auth\Http\Middleware;
 
-use RA\Auth\Services\SetUser;
+use Lumi\Auth\Services\SetUser;
 
 class SetUserMiddleware
 {
