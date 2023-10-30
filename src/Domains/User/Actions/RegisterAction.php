@@ -49,7 +49,7 @@ class RegisterAction extends Action
         ]);
 
         //create confirmation code
-        if ( config('ra-auth.activation_required') ) {
+        if ( config('lumi-auth.activation_required') ) {
             $code = ClassName::Model('UserCode')::create([
                 'user_id' => $item->id,
                 'type' => 'confirm',
@@ -62,7 +62,7 @@ class RegisterAction extends Action
         }
 
         //send welcome mail
-        if ( config('ra-auth.send_welcome_mail') ) {
+        if ( config('lumi-auth.send_welcome_mail') ) {
             MailSender::send(ClassName::Mail('User\WelcomeMail'), $item->email, compact('item', 'code'));
         }
 

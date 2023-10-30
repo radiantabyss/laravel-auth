@@ -24,7 +24,7 @@ class InviteValidator
         }
 
         //validate role
-        if ( !in_array($data['role'], config('ra-auth.allowed_team_roles')) ) {
+        if ( !in_array($data['role'], config('lumi-auth.allowed_team_roles')) ) {
             return 'Role is invalid.';
         }
 

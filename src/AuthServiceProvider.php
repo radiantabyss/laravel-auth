@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     public function register()
     {
         //load configs
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'ra-auth');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'lumi-auth');
 
         //register middleware
         $this->registerMiddleware();
@@ -74,47 +74,27 @@ class AuthServiceProvider extends ServiceProvider
 
         //config
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('ra-auth.php'),
-        ], 'ra-auth:config');
-
-        //actions
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Actions' => app_path('Domains/Auth/Actions'),
-        ], 'ra-auth:actions');
-
-        //commands
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Commands' => app_path('Domains/Auth/Commands'),
-        ], 'ra-auth:commands');
-
-        //mail
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Mail' => app_path('Domains/Auth/Mail'),
-        ], 'ra-auth:mail');
-
-        //presenters
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Presenters' => app_path('Domains/Auth/Presenters'),
-        ], 'ra-auth:presenters');
-
-        //transformers
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Transformers' => app_path('Domains/Auth/Transformers'),
-        ], 'ra-auth:transformers');
-
-        //validators
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Validators' => app_path('Domains/Auth/Validators'),
-        ], 'ra-auth:validators');
+            __DIR__.'/../config/config.php' => config_path('lumi-auth.php'),
+        ], 'lumi-auth:config');
 
         //routes
         $this->publishes([
-            __DIR__.'/../routes/routes.php' => base_path('routes/ra-auth.php'),
-        ], 'ra-auth:routes');
+            __DIR__.'/../routes/routes.php' => base_path('routes/lumi-auth.php'),
+        ], 'lumi-auth:routes');
 
         //migrations
         $this->publishes([
             __DIR__.'/../database/migrations' => base_path('database/migrations'),
-        ], 'ra-auth:migrations');
+        ], 'lumi-auth:migrations');
+
+        $domains = ['Team', 'User'];
+        $items = ['Actions', 'Commands', 'Mail', 'Presenters', 'Transformers', 'Validators'];
+        foreach ( $domains as $domain ) {
+            foreach ( $items as $item ) {
+                $this->publishes([
+                    __DIR__.'/Domains/'.$domain.'/'.$item => app_path('Domains/Auth/'.$domain.'/'.$item),
+                ], 'lumi-auth:'.strtolower($domain.'-'.$item));
+            }
+        }
     }
 }

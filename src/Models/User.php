@@ -21,7 +21,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $country = '';
         $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['REMOTE_ADDR'];
 
-        if ( config('ra-auth.country_guesser_installed') ) {
+        if ( config('lumi-auth.country_guesser_installed') ) {
             try {
                 $geoip = new \GeoIp2\Database\Reader(storage_path().'/geoip/GeoLite2-Country/GeoLite2-Country.mmdb');
                 $geoip_record = toArray($geoip->country($ip));

@@ -6,7 +6,7 @@ use Lumi\Core\Mail;
 class InviteMail extends Mail
 {
     public function build() {
-        $subject = str_replace('{{app_name}}', config('app.name'), config('ra-auth.mail_subjects.invite'));
+        $subject = str_replace('{{app_name}}', config('app.name'), config('lumi-auth.mail_subjects.invite'));
         $subject = str_replace('{{team_name}}', $this->params['team']->name, $subject);
         $this->subject($subject);
 

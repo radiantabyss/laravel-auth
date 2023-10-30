@@ -33,7 +33,7 @@ class LoginValidator
             ->where('type', 'confirm')
             ->first();
 
-        if ( config('ra-auth.activation_required') && $code ) {
+        if ( config('lumi-auth.activation_required') && $code ) {
             return 'This account hasn\'t been activated yet.';
         }
 

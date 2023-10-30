@@ -6,7 +6,7 @@ use Lumi\Auth\Services\ClassName;
 
 class ExpireInvitesCommand extends Command
 {
-    protected $signature = 'ra-auth:expire-invites';
+    protected $signature = 'lumi-auth:expire-invites';
     protected $description = 'Expires team invites.';
 
     public function handle() {
