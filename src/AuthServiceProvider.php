@@ -84,7 +84,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //migrations
         $this->publishes([
-            __DIR__.'/../database/migrations' => base_path('database/migrations'),
+            __DIR__.'/../database/migrations' => base_path('database/migrations/lumi-auth'),
         ], 'lumi-auth:migrations');
 
         $domains = ['Team', 'User'];
