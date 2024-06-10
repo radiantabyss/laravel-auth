@@ -8,7 +8,7 @@ use Lumi\Auth\Services\ClassName;
 class EditAction extends Action
 {
     public function run($id) {
-        $item = ClassName::Model('Team')::select('team.*', 'team_member.role', 'team_member.created_at as joined_at')
+        $item = ClassName::Model('Team')::select('team.*')
             ->leftJoin('team_member', 'team_member.team_id', '=', 'team.id')
             ->where('team.id', $id)
             ->where('team_member.user_id', \Auth::user()->id)

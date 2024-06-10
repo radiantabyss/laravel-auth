@@ -32,6 +32,9 @@ class UpdateAction extends Action
             ClassName::Model('TeamMeta')::updateOrCreate([
                 'team_id' => $id,
                 'key' => $key,
+            ], [
+                'team_id' => $id,
+                'key' => $key,
                 'value' => $value,
             ]);
         }

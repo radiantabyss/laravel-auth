@@ -23,7 +23,8 @@ class ListMembersAction extends Action
         Filter::apply($query, $filters);
 
         //paginate
-        $paginated = $query->paginate(config('settings.per_page'));
+        $per_page = \Request::get('per_page') ?: config('settings.data_table_per_page');
+        $paginated = $query->paginate($per_page);
         $items = ClassName::Presenter('Team\ListMembersPresenter')::run($paginated->items());
         $total = $paginated->total();
         $pages = $paginated->lastPage();
