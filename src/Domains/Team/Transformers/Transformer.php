@@ -8,6 +8,10 @@ class Transformer
             $data['uuid'] = \Str::uuid();
             $data['user_id'] = \Auth::user()->id;
         }
+        else {
+            unset($data['uuid']);
+            unset($data['user_id']);
+        }
 
         return $data;
     }
