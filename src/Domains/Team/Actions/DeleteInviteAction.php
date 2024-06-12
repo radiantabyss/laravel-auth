@@ -7,15 +7,11 @@ use Lumi\Auth\Services\ClassName;
 
 class DeleteInviteAction extends Action
 {
-    public function run($id) {
+    public function run($team_id, $id) {
         $item = ClassName::Model('TeamInvite')::find($id);
 
         if ( !$item ) {
             return 'Invite not found.';
-        }
-
-        if ( \Gate::denies('manage-team', $item->team_id) ) {
-            return 'Sorry, you can\'t delete this invite.';
         }
 
         $item->delete();

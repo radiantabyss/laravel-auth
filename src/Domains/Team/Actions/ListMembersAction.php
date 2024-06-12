@@ -9,10 +9,6 @@ use Lumi\Auth\Services\ClassName;
 class ListMembersAction extends Action
 {
     public function run($team_id) {
-        if ( \Gate::denies('manage-team', $team_id) ) {
-            return Response::error('Sorry, you can\'t view this team\'s members.');
-        }
-
         //get query
         $query = ClassName::Model('TeamMember')::select('id', 'user_id', 'role', 'created_at')
             ->with('user:id,email,name')

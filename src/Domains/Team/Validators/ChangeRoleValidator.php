@@ -5,7 +5,7 @@ use Lumi\Auth\Services\ClassName;
 
 class ChangeRoleValidator
 {
-    public static function run($data) {
+    public static function run($data, $team_id) {
         //validate request params
         $validator = \Validator::make($data, [
             'id' => 'required',
@@ -19,12 +19,8 @@ class ChangeRoleValidator
             return $validator->messages();
         }
 
-        if ( \Gate::denies('manage-team', $data['team_id']) ) {
-            return 'Sorry, you can\'t change this team member.';
-        }
-
         $item = ClassName::Model('TeamMember')::where('id', $data['id'])
-            ->where('team_id', $data['team_id'])
+            ->where('team_id', $team_id)
             ->where('role', '!=', 'owner')
             ->first();
 

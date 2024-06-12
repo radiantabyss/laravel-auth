@@ -6,10 +6,6 @@ use Lumi\Auth\Services\ClassName;
 class InviteValidator
 {
     public static function run($data, $id) {
-        if ( \Gate::denies('manage-team', $id) ) {
-            return 'Sorry, you can\'t invite members to this team.';
-        }
-
         //validate request params
         $validator = \Validator::make($data, [
             'emails' => 'required',

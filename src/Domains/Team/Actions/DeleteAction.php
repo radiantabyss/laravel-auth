@@ -7,33 +7,29 @@ use Lumi\Auth\Services\ClassName;
 
 class DeleteAction extends Action
 {
-    public function run($id) {
-        $item = ClassName::Model('Team')::find($id);
+    public function run($team_id) {
+        $item = ClassName::Model('Team')::find($team_id);
 
         if ( !$item ) {
             return Response::error('Team not found.');
         }
 
-        if ( \Gate::denies('manage-team', $id) ) {
-            return Response::error('Sorry, you can\'t delete this team.');
-        }
-
         //delete meta
-        ClassName::Model('TeamMeta')::where('team_id', $id)->delete();
+        ClassName::Model('TeamMeta')::where('team_id', $team_id)->delete();
 
         //delete members
-        ClassName::Model('TeamMember')::where('team_id', $id)->delete();
+        ClassName::Model('TeamMember')::where('team_id', $team_id)->delete();
 
         $item->delete();
 
         //switch team if is current team
-        $response = $this->handleCurrentTeam($id);
+        $response = $this->handleCurrentTeam($team_id);
 
         return Response::success($response);
     }
 
-    private function handleCurrentTeam($id) {
-        if ( \Auth::user()->team->id != $id ) {
+    private function handleCurrentTeam($team_id) {
+        if ( \Auth::user()->team->id != $team_id ) {
             return null;
         }
 

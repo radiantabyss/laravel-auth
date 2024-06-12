@@ -41,6 +41,7 @@ class AuthServiceProvider extends ServiceProvider
         $router->aliasMiddleware('Lumi\Auth\SetUser', \Lumi\Auth\Http\Middleware\SetUserMiddleware::class);
         $router->aliasMiddleware('Lumi\Auth\TeamRole', \Lumi\Auth\Http\Middleware\TeamRoleMiddleware::class);
         $router->aliasMiddleware('Lumi\Auth\UserType', \Lumi\Auth\Http\Middleware\UserTypeMiddleware::class);
+        $router->aliasMiddleware('Lumi\Auth\ManageTeam', \Lumi\Auth\Http\Middleware\ManageTeamMiddleware::class);
     }
 
     private function registerGates() {

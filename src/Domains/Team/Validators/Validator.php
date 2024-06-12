@@ -5,16 +5,12 @@ use Lumi\Auth\Services\ClassName;
 
 class Validator
 {
-    public static function run($data, $id = false) {
+    public static function run($data, $team_id = false) {
         //check if item exists
-        if ( $id ) {
-            $item = ClassName::Model('Team')::find($id);
+        if ( $team_id ) {
+            $item = ClassName::Model('Team')::find($team_id);
             if ( !$item ) {
                 return 'Team not found.';
-            }
-
-            if ( \Gate::denies('manage-team', $id) ) {
-                return 'Sorry, you can\'t edit this team.';
             }
         }
 

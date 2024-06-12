@@ -7,19 +7,15 @@ use Lumi\Auth\Services\ClassName;
 
 class EditAction extends Action
 {
-    public function run($id) {
+    public function run($team_id) {
         $item = ClassName::Model('Team')::select('team.*')
             ->leftJoin('team_member', 'team_member.team_id', '=', 'team.id')
-            ->where('team.id', $id)
+            ->where('team.id', $team_id)
             ->where('team_member.user_id', \Auth::user()->id)
             ->first();
 
         if ( !$item ) {
             return Response::error('Team not found.');
-        }
-
-        if ( \Gate::denies('manage-team', $id) ) {
-            return Response::error('Sorry, you can\'t edit this team.');
         }
 
         $item = ClassName::Presenter('Team\EditPresenter')::run($item);

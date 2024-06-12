@@ -25,7 +25,7 @@ class CreateAction extends Action
         //handle image upload
         $data = $this->handleImageUpload($data);
 
-        //insert
+        //save
         $item = ClassName::Model('Team')::create($data);
 
         //insert meta keys

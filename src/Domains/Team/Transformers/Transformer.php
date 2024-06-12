@@ -3,8 +3,8 @@ namespace Lumi\Auth\Domains\Team\Transformers;
 
 class Transformer
 {
-    public static function run($data, $id = null) {
-        if ( !$id ) {
+    public static function run($data, $team_id = null) {
+        if ( !$team_id ) {
             $data['uuid'] = \Str::uuid();
             $data['user_id'] = \Auth::user()->id;
         }

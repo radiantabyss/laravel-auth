@@ -7,7 +7,7 @@ use Lumi\Auth\Services\ClassName;
 
 class DeleteMemberAction extends Action
 {
-    public function run($id) {
+    public function run($team_id, $id) {
         $item = ClassName::Model('TeamMember')::find($id);
 
         //validate request

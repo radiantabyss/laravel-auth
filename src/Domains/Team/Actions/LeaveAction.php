@@ -7,26 +7,26 @@ use Lumi\Auth\Services\ClassName;
 
 class LeaveAction extends Action
 {
-    public function run($id) {
-        $item = ClassName::Model('Team')::find($id);
+    public function run($team_id) {
+        $item = ClassName::Model('Team')::find($team_id);
 
         if ( !$item ) {
             return Response::error('Team not found.');
         }
 
         //leave team
-        ClassName::Model('TeamMember')::where('team_id', $id)
+        ClassName::Model('TeamMember')::where('team_id', $team_id)
             ->where('user_id', \Auth::user()->id)
             ->delete();
 
         //switch team if is current team
-        $response = $this->handleCurrentTeam($id);
+        $response = $this->handleCurrentTeam($team_id);
 
         return Response::success($response);
     }
 
-    private function handleCurrentTeam($id) {
-        if ( \Auth::user()->team->id != $id ) {
+    private function handleCurrentTeam($team_id) {
+        if ( \Auth::user()->team->id != $team_id ) {
             return null;
         }
 

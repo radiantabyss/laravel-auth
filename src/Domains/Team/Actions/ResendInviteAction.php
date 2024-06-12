@@ -9,7 +9,7 @@ use Lumi\Auth\Domains\Team\Mail\InviteMail;
 
 class ResendInviteAction extends Action
 {
-    public function run($invite_id) {
+    public function run($team_id, $invite_id) {
         ClassName::Model('TeamInvite')::where('id', $invite_id)->update([
             'code' => \Str::random(30),
             'expires_at' => date('Y-m-d H:i:s', strtotime('+2 hours')),

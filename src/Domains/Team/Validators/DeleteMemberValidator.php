@@ -8,10 +8,6 @@ class DeleteMemberValidator
             return 'Team Member not found.';
         }
 
-        if ( \Gate::denies('manage-team', $item->team_id) ) {
-            return 'Sorry, you can\'t delete this team member.';
-        }
-
         if ( !in_array($item->role, config('lumi-auth.allowed_team_roles')) ) {
             return 'This member can\'t be deleted.';
         }

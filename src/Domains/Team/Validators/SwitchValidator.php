@@ -18,7 +18,7 @@ class SwitchValidator
             ->exists();
 
         if ( !$exists ) {
-            return 'You\'re not part of this team';
+            return 'Team not found.';
         }
 
         return true;

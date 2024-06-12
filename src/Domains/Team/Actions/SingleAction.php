@@ -7,8 +7,17 @@ use Lumi\Auth\Services\ClassName;
 
 class SingleAction extends Action
 {
-    public function run($id) {
-        $item = ClassName::Model('Team')::find($id);
+    public function run($team_id) {
+        //check if is user is in team
+        $exists = ClassName::Model('TeamMember')::where('team_id', $team_id)
+            ->where('user_id', \Auth::user()->id)
+            ->exists();
+
+        if ( !$exists ) {
+            return Response::error('Team not found.');
+        }
+
+        $item = ClassName::Model('Team')::find($team_id);
 
         if ( !$item ) {
             return Response::error('Team not found.');

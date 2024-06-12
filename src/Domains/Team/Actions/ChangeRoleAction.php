@@ -7,11 +7,11 @@ use Lumi\Auth\Services\ClassName;
 
 class ChangeRoleAction extends Action
 {
-    public function run() {
+    public function run($team_id) {
         $data = \Request::all();
 
         //validate request
-        $validation = ClassName::Validator('Team\ChangeRoleValidator')::run($data);
+        $validation = ClassName::Validator('Team\ChangeRoleValidator')::run($data, $team_id);
         if ( $validation !== true ) {
             return Response::error($validation);
         }
