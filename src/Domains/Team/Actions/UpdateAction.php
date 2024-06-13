@@ -78,7 +78,7 @@ class UpdateAction extends Action
             $data['meta'] = [];
         }
 
-        $data['meta']['image_path'] = '/user-team-images/'.$team_id.'/'.$image_name,
+        $data['meta']['image_path'] = '/user-team-images/'.$team_id.'/'.$image_name;
 
         return $data;
     }
