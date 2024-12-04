@@ -47,9 +47,7 @@ class AcceptInviteValidator
 
             //check if user already exists
             $user = ClassName::Model('User')::where('email', trim($data['email']))->first();
-
-            //check if password if correct
-            if ( !\Hash::check($data['password'], $user->passowrd) ) {
+            if ( $user ) {
                 return 'A user with this email already exists.';
             }
 

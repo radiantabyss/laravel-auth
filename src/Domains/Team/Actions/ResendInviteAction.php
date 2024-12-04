@@ -5,7 +5,6 @@ use Illuminate\Routing\Controller as Action;
 use Lumi\Core\Response;
 use Lumi\Core\MailSender;
 use Lumi\Auth\Services\ClassName;
-use Lumi\Auth\Domains\Team\Mail\InviteMail;
 
 class ResendInviteAction extends Action
 {
@@ -22,7 +21,7 @@ class ResendInviteAction extends Action
         }
 
         //send mail
-        MailSender::run(InviteMail::class, $invite->email, [
+        MailSender::run(ClassName::Mail('Team\InviteMail'), $invite->email, [
             'team' => $invite->team,
             'invite' => $invite,
         ]);

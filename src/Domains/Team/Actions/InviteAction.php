@@ -22,12 +22,12 @@ class InviteAction extends Action
         //save to db
         $invites_data = ClassName::Transformer('Team\InviteTransformer')::run($data, $team_id);
         $invites = [];
-        
+
         foreach ( $invites_data as $invite_data ) {
             $invite = ClassName::Model('TeamInvite')::create($invite_data);
 
             //send mail
-            MailSender::run(ClassName::Mail('Team\InviteMail')::class, $invite->email, [
+            MailSender::run(ClassName::Mail('Team\InviteMail'), $invite->email, [
                 'team' => $team,
                 'invite' => $invite,
             ]);
