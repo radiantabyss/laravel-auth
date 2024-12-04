@@ -29,9 +29,6 @@ class AuthServiceProvider extends ServiceProvider
 
         //register middleware
         $this->registerMiddleware();
-
-        //register gates
-        $this->registerGates();
     }
 
     private function registerMiddleware() {
@@ -41,31 +38,6 @@ class AuthServiceProvider extends ServiceProvider
         $router->aliasMiddleware('Lumi\Auth\SetUser', \Lumi\Auth\Http\Middleware\SetUserMiddleware::class);
         $router->aliasMiddleware('Lumi\Auth\TeamRole', \Lumi\Auth\Http\Middleware\TeamRoleMiddleware::class);
         $router->aliasMiddleware('Lumi\Auth\UserType', \Lumi\Auth\Http\Middleware\UserTypeMiddleware::class);
-        $router->aliasMiddleware('Lumi\Auth\ManageTeam', \Lumi\Auth\Http\Middleware\ManageTeamMiddleware::class);
-    }
-
-    private function registerGates() {
-        \Gate::define('owns-team', function($user, $team_id = null) {
-            if ( $user->type == 'super_admin' ) {
-                return true;
-            }
-
-            return ClassName::Model('TeamMember')::where('team_id', $team_id ?: $user->team->id)
-                ->where('user_id', $user->id)
-                ->where('role', 'owner')
-                ->exists();
-        });
-
-        \Gate::define('manage-team', function($user, $team_id = null) {
-            if ( $user->type == 'super_admin' ) {
-                return true;
-            }
-
-            return ClassName::Model('TeamMember')::where('team_id', $team_id ?: $user->team->id)
-                ->where('user_id', $user->id)
-                ->whereIn('role', ['owner', 'admin'])
-                ->exists();
-        });
     }
 
     private function enablePublishing() {

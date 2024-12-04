@@ -5,8 +5,7 @@ use Lumi\Core\Response;
 
 class NotLoggedMiddleware
 {
-    public function handle($request, \Closure $next)
-    {
+    public function handle($request, \Closure $next) {
         if ( \Auth::check() ) {
             return Response::error('Logged users are not allowed.');
         }

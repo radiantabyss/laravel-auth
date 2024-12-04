@@ -5,18 +5,12 @@ use Lumi\Core\Response;
 
 class TeamRoleMiddleware
 {
-    public function handle($request, \Closure $next, $role)
-    {
-        //check if user type is super admin
-        if ( \Auth::user()->type == 'super_admin' ) {
-            return $next($request);
-        }
-
+    public function handle($request, \Closure $next, $role) {
         $roles = explode('|', $role);
 
         //check user role in team
         if ( !in_array(\Auth::user()->team->role, $roles) ) {
-            return Response::error('Not found.');
+            return Response::error('Not allowed.');
         }
 
         return $next($request);
