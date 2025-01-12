@@ -1,12 +1,11 @@
 <?php
-namespace Lumi\Auth\Http\Middleware;
+namespace RA\Auth\Http\Middleware;
 
-use Lumi\Auth\Services\SetUser;
+use RA\Auth\Services\SetUser;
 
 class SetUserMiddleware
 {
-    public function handle($request, \Closure $next)
-    {
+    public function handle($request, \Closure $next) {
         SetUser::run($request);
         return $next($request);
     }

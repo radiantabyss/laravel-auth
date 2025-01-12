@@ -1,7 +1,7 @@
 <?php
-namespace Lumi\Auth\Domains\User\Mail;
+namespace RA\Auth\Domains\User\Mail;
 
-use Lumi\Core\Mail;
+use RA\Core\Mail;
 
 class ForgotPasswordMail extends Mail
 {
@@ -9,7 +9,7 @@ class ForgotPasswordMail extends Mail
         $subject = str_replace('{{app_name}}', config('app.name'), config('ra-auth.mail_subjects.forgot-password'));
         $this->subject($subject);
 
-        $view = \View::exists('Auth.User::forgot-password') ? 'Auth.User::forgot-password' : 'Lumi.Auth.User::forgot-password';
+        $view = \View::exists('Auth.User::forgot-password') ? 'Auth.User::forgot-password' : 'RA.Auth.User::forgot-password';
         $this->view($view, $this->params);
 
         return $this;

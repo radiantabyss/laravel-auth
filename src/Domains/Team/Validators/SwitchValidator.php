@@ -1,7 +1,7 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Validators;
+namespace RA\Auth\Domains\Team\Validators;
 
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class SwitchValidator
 {
@@ -18,7 +18,7 @@ class SwitchValidator
             ->exists();
 
         if ( !$exists ) {
-            return 'You\'re not part of this team';
+            return 'Team not found.';
         }
 
         return true;

@@ -1,9 +1,9 @@
 <?php
-namespace Lumi\Auth\Domains\User\Actions;
+namespace RA\Auth\Domains\User\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use Lumi\Core\Response;
-use Lumi\Auth\Services\ClassName;
+use RA\Core\Response;
+use RA\Auth\Services\ClassName;
 
 class PatchAction extends Action
 {

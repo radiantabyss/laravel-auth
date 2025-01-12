@@ -1,10 +1,10 @@
 <?php
 return [
     'send_welcome_mail' => true,
-    'activation_required' => true,
+    'activation_required' => false,
     'use_teams' => true,
     'allowed_team_roles' => ['member'],
-    'country_guesser_installed' => true,
+    'country_guesser_installed' => false,
 
     'mail_subjects' => [
         'welcome' => 'Welcome to {{app_name}}',

@@ -1,34 +1,34 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Actions;
+namespace RA\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use Lumi\Core\Response;
-use Lumi\Core\MailSender;
-use Lumi\Auth\Services\ClassName;
+use RA\Core\Response;
+use RA\Core\MailSender;
+use RA\Auth\Services\ClassName;
 
 class InviteAction extends Action
 {
-    public function run($id) {
+    public function run($team_id) {
         $data = \Request::all();
 
         //validate request
-        $validation = ClassName::Validator('Team\InviteValidator')::run($data, $id);
+        $validation = ClassName::Validator('Team\InviteValidator')::run($data, $team_id);
         if ( $validation !== true ) {
             return Response::error($validation);
         }
 
+        $team = ClassName::Model('Team')::find($team_id);
+
         //save to db
-        $data = ClassName::Transformer('Team\InviteTransformer')::run($data, $id);
-
-        $item = ClassName::Model('Team')::find($id);
-
+        $invites_data = ClassName::Transformer('Team\InviteTransformer')::run($data, $team_id);
         $invites = [];
-        foreach ( $data as $data_item ) {
-            $invite = ClassName::Model('TeamInvite')::create($data_item);
+
+        foreach ( $invites_data as $invite_data ) {
+            $invite = ClassName::Model('TeamInvite')::create($invite_data);
 
             //send mail
-            MailSender::run(ClassName::Mail('Team\InviteMail')::class, $invite->email, [
-                'team' => $item,
+            MailSender::run(ClassName::Mail('Team\InviteMail'), $invite->email, [
+                'team' => $team,
                 'invite' => $invite,
             ]);
 

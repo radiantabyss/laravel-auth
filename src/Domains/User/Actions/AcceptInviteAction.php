@@ -1,13 +1,16 @@
 <?php
-namespace Lumi\Auth\Domains\User\Actions;
+namespace RA\Auth\Domains\User\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use Lumi\Core\Response;
-use Lumi\Auth\Services\ClassName;
+use RA\Core\Response;
+use RA\Auth\Services\ClassName;
+use RA\Auth\Services\Jwt;
 
 class AcceptInviteAction extends Action
 {
-    public function run($email, $code) {
+    public function run() {
+        $data = \Request::all();
+
         //validate request
         $validation = ClassName::Validator('User\AcceptInviteValidator')::run($data);
         if ( $validation !== true ) {
@@ -52,7 +55,7 @@ class AcceptInviteAction extends Action
         ]);
 
         //generate jwt token
-        $item = ClassName::Presenter('User\Presenter')::run(\Auth::user(), $invite->team_id);
+        $item = ClassName::Presenter('User\Presenter')::run($item, $invite->team_id);
         $jwt_token = Jwt::generate(ClassName::Presenter('User\JwtPresenter')::run(clone $item));
 
         //log event

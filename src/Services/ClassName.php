@@ -1,5 +1,5 @@
 <?php
-namespace Lumi\Auth\Services;
+namespace RA\Auth\Services;
 
 class ClassName
 {
@@ -8,7 +8,7 @@ class ClassName
             return '\App\Models\\'.$model;
         }
 
-        return '\Lumi\Auth\Models\\'.$model;
+        return '\RA\Auth\Models\\'.$model;
     }
 
     public static function Presenter($name) {
@@ -20,7 +20,7 @@ class ClassName
             return '\App\Domains\Auth\\'.$namespace.'\\Presenters\\'.$name;
         }
 
-        return '\Lumi\Auth\Domains\\'.$namespace.'\\Presenters\\'.$name;
+        return '\RA\Auth\Domains\\'.$namespace.'\\Presenters\\'.$name;
     }
 
     public static function Transformer($name) {
@@ -32,7 +32,7 @@ class ClassName
             return '\App\Domains\Auth\\'.$namespace.'\\Transformers\\'.$name;
         }
 
-        return '\Lumi\Auth\Domains\\'.$namespace.'\\Transformers\\'.$name;
+        return '\RA\Auth\Domains\\'.$namespace.'\\Transformers\\'.$name;
     }
 
     public static function Validator($name) {
@@ -44,7 +44,7 @@ class ClassName
             return '\App\Domains\Auth\\'.$namespace.'\\Validators\\'.$name;
         }
 
-        return '\Lumi\Auth\Domains\\'.$namespace.'\\Validators\\'.$name;
+        return '\RA\Auth\Domains\\'.$namespace.'\\Validators\\'.$name;
     }
 
     public static function Mail($name) {
@@ -56,6 +56,6 @@ class ClassName
             return '\App\Domains\Auth\\'.$namespace.'\\Mail\\'.$name;
         }
 
-        return '\Lumi\Auth\Domains\\'.$namespace.'\\Mail\\'.$name;
+        return '\RA\Auth\Domains\\'.$namespace.'\\Mail\\'.$name;
     }
 }

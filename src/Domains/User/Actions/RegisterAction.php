@@ -1,11 +1,11 @@
 <?php
-namespace Lumi\Auth\Domains\User\Actions;
+namespace RA\Auth\Domains\User\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use Lumi\Core\MailSender;
-use Lumi\Core\Response;
-use Lumi\Auth\Services\ClassName;
-use Lumi\Auth\Services\Jwt;
+use RA\Core\MailSender;
+use RA\Core\Response;
+use RA\Auth\Services\ClassName;
+use RA\Auth\Services\Jwt;
 
 class RegisterAction extends Action
 {
@@ -36,7 +36,7 @@ class RegisterAction extends Action
 
         //create default team
         $team = ClassName::Model('Team')::create([
-            'user_id' => $item->id,
+            'created_by' => $item->id,
             'uuid' => \Str::uuid(),
             'name' => 'My Team',
         ]);

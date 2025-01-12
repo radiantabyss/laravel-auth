@@ -1,15 +1,14 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Actions;
+namespace RA\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use Lumi\Core\Response;
-use Lumi\Core\MailSender;
-use Lumi\Auth\Services\ClassName;
-use Lumi\Auth\Domains\Team\Mail\InviteMail;
+use RA\Core\Response;
+use RA\Core\MailSender;
+use RA\Auth\Services\ClassName;
 
 class ResendInviteAction extends Action
 {
-    public function run($invite_id) {
+    public function run($team_id, $invite_id) {
         ClassName::Model('TeamInvite')::where('id', $invite_id)->update([
             'code' => \Str::random(30),
             'expires_at' => date('Y-m-d H:i:s', strtotime('+2 hours')),
@@ -22,7 +21,7 @@ class ResendInviteAction extends Action
         }
 
         //send mail
-        MailSender::run(InviteMail::class, $invite->email, [
+        MailSender::run(ClassName::Mail('Team\InviteMail'), $invite->email, [
             'team' => $invite->team,
             'invite' => $invite,
         ]);

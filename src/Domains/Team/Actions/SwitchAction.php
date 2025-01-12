@@ -1,10 +1,10 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Actions;
+namespace RA\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use Lumi\Core\Response;
-use Lumi\Auth\Services\ClassName;
-use Lumi\Auth\Services\Jwt;
+use RA\Core\Response;
+use RA\Auth\Services\ClassName;
+use RA\Auth\Services\Jwt;
 
 class SwitchAction extends Action
 {

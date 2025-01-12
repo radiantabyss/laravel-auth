@@ -1,11 +1,11 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Transformers;
+namespace RA\Auth\Domains\Team\Transformers;
 
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class InviteTransformer
 {
-    public static function run($data, $id) {
+    public static function run($data, $team_id) {
         $formatted = [];
 
         //get all emails from input
@@ -15,12 +15,12 @@ class InviteTransformer
         //check if users with email is already a part of the team
         $user_emails = keyBy(ClassName::Model('TeamMember')::select('email')
             ->leftJoin('user', 'user.id', '=', 'team_member.user_id')
-            ->where('team_id', $id)
+            ->where('team_id', $team_id)
             ->whereIn('user.email', $emails)
             ->get(), 'email');
 
         //check if users with email were already invited
-        $invited_emails = keyBy(ClassName::Model('TeamInvite')::where('team_id', $id)
+        $invited_emails = keyBy(ClassName::Model('TeamInvite')::where('team_id', $team_id)
             ->whereIn('email', $emails)
             ->get(), 'email');
 
@@ -30,7 +30,7 @@ class InviteTransformer
             }
 
             $formatted[] = [
-                'team_id' => \Auth::user()->team->id,
+                'team_id' => $team_id,
                 'email' => $email,
                 'role' => $data['role'],
                 'code' => \Str::random(30),

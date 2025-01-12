@@ -1,5 +1,5 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Presenters;
+namespace RA\Auth\Domains\Team\Presenters;
 
 class Presenter
 {

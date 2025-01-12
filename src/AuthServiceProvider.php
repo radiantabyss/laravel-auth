@@ -1,8 +1,8 @@
 <?php
-namespace Lumi\Auth;
+namespace RA\Auth;
 
 use Illuminate\Support\ServiceProvider;
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -15,8 +15,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->enablePublishing();
 
         //register view domains
-        \View::addNamespace('Lumi.Auth.Team', __DIR__.'/Domains/Team/Mail/views');
-        \View::addNamespace('Lumi.Auth.User', __DIR__.'/Domains/User/Mail/views');
+        \View::addNamespace('RA.Auth.Team', __DIR__.'/Domains/Team/Mail/views');
+        \View::addNamespace('RA.Auth.User', __DIR__.'/Domains/User/Mail/views');
     }
 
     /**
@@ -29,42 +29,15 @@ class AuthServiceProvider extends ServiceProvider
 
         //register middleware
         $this->registerMiddleware();
-
-        //register gates
-        $this->registerGates();
     }
 
     private function registerMiddleware() {
         $router = $this->app['router'];
-        $router->aliasMiddleware('Lumi\Auth\Logged', \Lumi\Auth\Http\Middleware\LoggedMiddleware::class);
-        $router->aliasMiddleware('Lumi\Auth\NotLogged', \Lumi\Auth\Http\Middleware\NotLoggedMiddleware::class);
-        $router->aliasMiddleware('Lumi\Auth\SetUser', \Lumi\Auth\Http\Middleware\SetUserMiddleware::class);
-        $router->aliasMiddleware('Lumi\Auth\TeamRole', \Lumi\Auth\Http\Middleware\TeamRoleMiddleware::class);
-        $router->aliasMiddleware('Lumi\Auth\UserType', \Lumi\Auth\Http\Middleware\UserTypeMiddleware::class);
-    }
-
-    private function registerGates() {
-        \Gate::define('owns-team', function($user, $team_id = null) {
-            if ( $user->type == 'super_admin' ) {
-                return true;
-            }
-
-            return ClassName::Model('TeamMember')::where('team_id', $team_id ?: $user->team->id)
-                ->where('user_id', $user->id)
-                ->where('role', 'owner')
-                ->exists();
-        });
-
-        \Gate::define('manage-team', function($user, $team_id = null) {
-            if ( $user->type == 'super_admin' ) {
-                return true;
-            }
-
-            return ClassName::Model('TeamMember')::where('team_id', $team_id ?: $user->team->id)
-                ->where('user_id', $user->id)
-                ->whereIn('role', ['owner', 'admin'])
-                ->exists();
-        });
+        $router->aliasMiddleware('RA\Auth\Logged', \RA\Auth\Http\Middleware\LoggedMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\NotLogged', \RA\Auth\Http\Middleware\NotLoggedMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\SetUser', \RA\Auth\Http\Middleware\SetUserMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\TeamRole', \RA\Auth\Http\Middleware\TeamRoleMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\UserType', \RA\Auth\Http\Middleware\UserTypeMiddleware::class);
     }
 
     private function enablePublishing() {
@@ -77,36 +50,6 @@ class AuthServiceProvider extends ServiceProvider
             __DIR__.'/../config/config.php' => config_path('ra-auth.php'),
         ], 'ra-auth:config');
 
-        //actions
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Actions' => app_path('Domains/Auth/Actions'),
-        ], 'ra-auth:actions');
-
-        //commands
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Commands' => app_path('Domains/Auth/Commands'),
-        ], 'ra-auth:commands');
-
-        //mail
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Mail' => app_path('Domains/Auth/Mail'),
-        ], 'ra-auth:mail');
-
-        //presenters
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Presenters' => app_path('Domains/Auth/Presenters'),
-        ], 'ra-auth:presenters');
-
-        //transformers
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Transformers' => app_path('Domains/Auth/Transformers'),
-        ], 'ra-auth:transformers');
-
-        //validators
-        $this->publishes([
-            __DIR__.'/Domains/Auth/Validators' => app_path('Domains/Auth/Validators'),
-        ], 'ra-auth:validators');
-
         //routes
         $this->publishes([
             __DIR__.'/../routes/routes.php' => base_path('routes/ra-auth.php'),
@@ -114,7 +57,17 @@ class AuthServiceProvider extends ServiceProvider
 
         //migrations
         $this->publishes([
-            __DIR__.'/../database/migrations' => base_path('database/migrations'),
+            __DIR__.'/../database/migrations' => base_path('database/migrations/ra-auth'),
         ], 'ra-auth:migrations');
+
+        $domains = ['Team', 'User'];
+        $items = ['Actions', 'Commands', 'Mail', 'Presenters', 'Transformers', 'Validators'];
+        foreach ( $domains as $domain ) {
+            foreach ( $items as $item ) {
+                $this->publishes([
+                    __DIR__.'/Domains/'.$domain.'/'.$item => app_path('Domains/Auth/'.$domain.'/'.$item),
+                ], 'ra-auth:'.strtolower($domain.'-'.$item));
+            }
+        }
     }
 }

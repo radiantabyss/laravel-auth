@@ -1,17 +1,17 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Actions;
+namespace RA\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use Lumi\Core\Response;
-use Lumi\Auth\Services\ClassName;
+use RA\Core\Response;
+use RA\Auth\Services\ClassName;
 
 class ChangeRoleAction extends Action
 {
-    public function run() {
+    public function run($team_id) {
         $data = \Request::all();
 
         //validate request
-        $validation = ClassName::Validator('Team\ChangeRoleValidator')::run($data);
+        $validation = ClassName::Validator('Team\ChangeRoleValidator')::run($data, $team_id);
         if ( $validation !== true ) {
             return Response::error($validation);
         }

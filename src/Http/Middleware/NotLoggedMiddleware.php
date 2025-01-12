@@ -1,12 +1,11 @@
 <?php
-namespace Lumi\Auth\Http\Middleware;
+namespace RA\Auth\Http\Middleware;
 
-use Lumi\Core\Response;
+use RA\Core\Response;
 
 class NotLoggedMiddleware
 {
-    public function handle($request, \Closure $next)
-    {
+    public function handle($request, \Closure $next) {
         if ( \Auth::check() ) {
             return Response::error('Logged users are not allowed.');
         }
