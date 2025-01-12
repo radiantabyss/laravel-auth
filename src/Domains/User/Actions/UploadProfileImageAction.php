@@ -1,10 +1,10 @@
 <?php
-namespace Lumi\Auth\Domains\User\Actions;
+namespace RA\Auth\Domains\User\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use Lumi\Core\Response;
+use RA\Core\Response;
 use Intervention\Image\ImageManagerStatic as Image;
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class UploadProfileImageAction extends Action
 {

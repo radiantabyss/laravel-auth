@@ -1,7 +1,7 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Transformers;
+namespace RA\Auth\Domains\Team\Transformers;
 
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class InviteTransformer
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Lumi\Auth\Domains\User\Presenters;
+namespace RA\Auth\Domains\User\Presenters;
 
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class JwtPresenter
 {

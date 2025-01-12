@@ -1,7 +1,7 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Presenters;
+namespace RA\Auth\Domains\Team\Presenters;
 
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class EditPresenter
 {

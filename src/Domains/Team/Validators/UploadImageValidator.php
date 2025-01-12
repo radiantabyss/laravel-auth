@@ -1,5 +1,5 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Validators;
+namespace RA\Auth\Domains\Team\Validators;
 
 class UploadImageValidator
 {

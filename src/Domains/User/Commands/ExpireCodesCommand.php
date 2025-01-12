@@ -1,12 +1,12 @@
 <?php
-namespace Lumi\Auth\Domains\User\Commands;
+namespace RA\Auth\Domains\User\Commands;
 
 use Illuminate\Console\Command;
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class ExpireCodesCommand extends Command
 {
-    protected $signature = 'lumi-auth:expire-codes';
+    protected $signature = 'ra-auth:expire-codes';
     protected $description = 'Expires user codes and invites.';
 
     public function handle() {

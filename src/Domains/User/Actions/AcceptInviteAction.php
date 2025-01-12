@@ -1,10 +1,10 @@
 <?php
-namespace Lumi\Auth\Domains\User\Actions;
+namespace RA\Auth\Domains\User\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use Lumi\Core\Response;
-use Lumi\Auth\Services\ClassName;
-use Lumi\Auth\Services\Jwt;
+use RA\Core\Response;
+use RA\Auth\Services\ClassName;
+use RA\Auth\Services\Jwt;
 
 class AcceptInviteAction extends Action
 {

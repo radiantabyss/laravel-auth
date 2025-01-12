@@ -1,5 +1,5 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Validators;
+namespace RA\Auth\Domains\Team\Validators;
 
 class DeleteMemberValidator
 {
@@ -8,7 +8,7 @@ class DeleteMemberValidator
             return 'Team Member not found.';
         }
 
-        if ( !in_array($item->role, config('lumi-auth.allowed_team_roles')) ) {
+        if ( !in_array($item->role, config('ra-auth.allowed_team_roles')) ) {
             return 'This member can\'t be deleted.';
         }
 

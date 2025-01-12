@@ -1,7 +1,7 @@
 <?php
-namespace Lumi\Auth\Domains\Team\Validators;
+namespace RA\Auth\Domains\Team\Validators;
 
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class ChangeRoleValidator
 {

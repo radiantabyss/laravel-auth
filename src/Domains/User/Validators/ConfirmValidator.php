@@ -1,7 +1,7 @@
 <?php
-namespace Lumi\Auth\Domains\User\Validators;
+namespace RA\Auth\Domains\User\Validators;
 
-use Lumi\Auth\Models as Model;
+use RA\Auth\Models as Model;
 
 class ConfirmValidator
 {

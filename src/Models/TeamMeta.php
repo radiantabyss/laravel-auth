@@ -1,7 +1,7 @@
 <?php
-namespace Lumi\Auth\Models;
+namespace RA\Auth\Models;
 
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class TeamMeta extends Model
 {

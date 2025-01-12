@@ -1,7 +1,7 @@
 <?php
-namespace Lumi\Auth\Domains\User\Validators;
+namespace RA\Auth\Domains\User\Validators;
 
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class LoginValidator
 {
@@ -33,7 +33,7 @@ class LoginValidator
             ->where('type', 'confirm')
             ->first();
 
-        if ( config('lumi-auth.activation_required') && $code ) {
+        if ( config('ra-auth.activation_required') && $code ) {
             return 'This account hasn\'t been activated yet.';
         }
 

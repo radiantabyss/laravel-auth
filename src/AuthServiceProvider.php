@@ -1,8 +1,8 @@
 <?php
-namespace Lumi\Auth;
+namespace RA\Auth;
 
 use Illuminate\Support\ServiceProvider;
-use Lumi\Auth\Services\ClassName;
+use RA\Auth\Services\ClassName;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -15,8 +15,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->enablePublishing();
 
         //register view domains
-        \View::addNamespace('Lumi.Auth.Team', __DIR__.'/Domains/Team/Mail/views');
-        \View::addNamespace('Lumi.Auth.User', __DIR__.'/Domains/User/Mail/views');
+        \View::addNamespace('RA.Auth.Team', __DIR__.'/Domains/Team/Mail/views');
+        \View::addNamespace('RA.Auth.User', __DIR__.'/Domains/User/Mail/views');
     }
 
     /**
@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     public function register()
     {
         //load configs
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'lumi-auth');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'ra-auth');
 
         //register middleware
         $this->registerMiddleware();
@@ -33,11 +33,11 @@ class AuthServiceProvider extends ServiceProvider
 
     private function registerMiddleware() {
         $router = $this->app['router'];
-        $router->aliasMiddleware('Lumi\Auth\Logged', \Lumi\Auth\Http\Middleware\LoggedMiddleware::class);
-        $router->aliasMiddleware('Lumi\Auth\NotLogged', \Lumi\Auth\Http\Middleware\NotLoggedMiddleware::class);
-        $router->aliasMiddleware('Lumi\Auth\SetUser', \Lumi\Auth\Http\Middleware\SetUserMiddleware::class);
-        $router->aliasMiddleware('Lumi\Auth\TeamRole', \Lumi\Auth\Http\Middleware\TeamRoleMiddleware::class);
-        $router->aliasMiddleware('Lumi\Auth\UserType', \Lumi\Auth\Http\Middleware\UserTypeMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\Logged', \RA\Auth\Http\Middleware\LoggedMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\NotLogged', \RA\Auth\Http\Middleware\NotLoggedMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\SetUser', \RA\Auth\Http\Middleware\SetUserMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\TeamRole', \RA\Auth\Http\Middleware\TeamRoleMiddleware::class);
+        $router->aliasMiddleware('RA\Auth\UserType', \RA\Auth\Http\Middleware\UserTypeMiddleware::class);
     }
 
     private function enablePublishing() {
@@ -47,18 +47,18 @@ class AuthServiceProvider extends ServiceProvider
 
         //config
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('lumi-auth.php'),
-        ], 'lumi-auth:config');
+            __DIR__.'/../config/config.php' => config_path('ra-auth.php'),
+        ], 'ra-auth:config');
 
         //routes
         $this->publishes([
-            __DIR__.'/../routes/routes.php' => base_path('routes/lumi-auth.php'),
-        ], 'lumi-auth:routes');
+            __DIR__.'/../routes/routes.php' => base_path('routes/ra-auth.php'),
+        ], 'ra-auth:routes');
 
         //migrations
         $this->publishes([
-            __DIR__.'/../database/migrations' => base_path('database/migrations/lumi-auth'),
-        ], 'lumi-auth:migrations');
+            __DIR__.'/../database/migrations' => base_path('database/migrations/ra-auth'),
+        ], 'ra-auth:migrations');
 
         $domains = ['Team', 'User'];
         $items = ['Actions', 'Commands', 'Mail', 'Presenters', 'Transformers', 'Validators'];
@@ -66,7 +66,7 @@ class AuthServiceProvider extends ServiceProvider
             foreach ( $items as $item ) {
                 $this->publishes([
                     __DIR__.'/Domains/'.$domain.'/'.$item => app_path('Domains/Auth/'.$domain.'/'.$item),
-                ], 'lumi-auth:'.strtolower($domain.'-'.$item));
+                ], 'ra-auth:'.strtolower($domain.'-'.$item));
             }
         }
     }
