@@ -1,5 +1,5 @@
 <?php
-use RA\Core\Route;
+use RA\Route;
 
 //no auth
 Route::group(['middleware' => ['RA\Auth\NotLogged']], function() {
