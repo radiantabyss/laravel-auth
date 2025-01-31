@@ -2,8 +2,8 @@
 namespace RA\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use RA\Core\Response;
-use RA\Core\Filter;
+use RA\Response;
+use RA\Filter;
 use RA\Auth\Services\ClassName;
 
 class ListMembersAction extends Action

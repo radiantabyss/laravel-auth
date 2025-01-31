@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Domains\User\Mail;
 
-use RA\Core\Mail;
+use RA\Mail;
 
 class ForgotPasswordMail extends Mail
 {

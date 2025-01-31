@@ -2,8 +2,8 @@
 namespace RA\Auth\Domains\User\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use RA\Core\MailSender;
-use RA\Core\Response;
+use RA\MailSender;
+use RA\Response;
 use RA\Auth\Services\ClassName;
 use RA\Auth\Services\Jwt;
 

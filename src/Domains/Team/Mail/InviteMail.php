@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Domains\Team\Mail;
 
-use RA\Core\Mail;
+use RA\Mail;
 
 class InviteMail extends Mail
 {

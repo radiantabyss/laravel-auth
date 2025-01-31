@@ -2,8 +2,8 @@
 namespace RA\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use RA\Core\Response;
-use RA\Core\MailSender;
+use RA\Response;
+use RA\MailSender;
 use RA\Auth\Services\ClassName;
 
 class ResendInviteAction extends Action

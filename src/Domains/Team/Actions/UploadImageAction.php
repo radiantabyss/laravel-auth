@@ -2,7 +2,7 @@
 namespace RA\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
-use RA\Core\Response;
+use RA\Response;
 use Intervention\Image\ImageManagerStatic as Image;
 use RA\Auth\Services\ClassName;
 

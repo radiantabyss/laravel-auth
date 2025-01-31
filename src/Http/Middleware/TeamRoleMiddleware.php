@@ -1,7 +1,7 @@
 <?php
 namespace RA\Auth\Http\Middleware;
 
-use RA\Core\Response;
+use RA\Response;
 
 class TeamRoleMiddleware
 {
