@@ -5,19 +5,19 @@ use Illuminate\Routing\Controller as Action;
 use RA\Response;
 use RA\Auth\Services\ClassName;
 
-class UpdateAction extends Action
+class PatchAction extends Action
 {
     public function run($team_id) {
         $data = \Request::all();
 
         //validate request
-        $validation = ClassName::Validator('Team\Validator')::run($data, $team_id);
+        $validation = ClassName::Validator('Team\PatchValidator')::run($data);
         if ( $validation !== true ) {
             return Response::error($validation);
         }
 
         //transform data
-        $data = ClassName::Transformer('Team\Transformer')::run($data, $team_id);
+        $data = ClassName::Transformer('Team\PatchTransformer')::run($data);
         $meta = $data['meta'] ?? [];
         unset($data['meta']);
 
@@ -27,7 +27,7 @@ class UpdateAction extends Action
         //update
         ClassName::Model('Team')::where('id', $team_id)->update($data);
 
-        //update meta keys
+        //update meta
         foreach ( $meta as $key => $value ) {
             ClassName::Model('TeamMeta')::updateOrCreate([
                 'team_id' => $team_id,
@@ -39,7 +39,7 @@ class UpdateAction extends Action
             ]);
         }
 
-        //format for return
+        //get for return
         $item = ClassName::Model('Team')::find($team_id);
         $item = ClassName::Presenter('Team\Presenter')::run($item);
 

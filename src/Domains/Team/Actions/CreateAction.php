@@ -19,7 +19,7 @@ class CreateAction extends Action
 
         //transform data
         $data = ClassName::Transformer('Team\Transformer')::run($data);
-        $meta = $data['meta'];
+        $meta = $data['meta'] ?? [];
         unset($data['meta']);
 
         //handle image upload

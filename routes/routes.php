@@ -30,6 +30,7 @@ Route::group(['middleware' => ['RA\Auth\Logged']], function() {
 Route::group(['middleware' => ['RA\Auth\Logged', 'RA\Auth\TeamRole:owner']], function() {
     Route::get('/auth/team/edit/{team_id}', 'Team\EditAction');
     Route::post('/auth/team/update/{team_id}', 'Team\UpdateAction');
+    Route::post('/auth/team/patch/{team_id}', 'Team\PatchAction');
     Route::get('/auth/team/delete/{team_id}', 'Team\DeleteAction');
 
     Route::post('/auth/team/upload-image/{team_id}', 'Team\UploadImageAction');

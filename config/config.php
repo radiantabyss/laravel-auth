@@ -11,4 +11,6 @@ return [
         'forgot-password' => 'Reset your password - {{app_name}}',
         'invite' => 'You have been invited to join {{team_name}} - {{app_name}}',
     ],
+
+    'encrypted_team_meta_fields' => [],
 ];

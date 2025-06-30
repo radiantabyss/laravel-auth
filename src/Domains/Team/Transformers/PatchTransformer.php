@@ -1,35 +1,21 @@
 <?php
-namespace RA\Auth\Domains\User\Transformers;
+namespace RA\Auth\Domains\Team\Transformers;
 
 use RA\Auth\Services\ClassName;
 
 class PatchTransformer
 {
     private static $allowed_fields = [
-        'username', 'email', 'current_password', 'password', 'name',
+        'name',
     ];
 
     private static $allowed_meta_fields = [
-        'first_name', 'last_name', 'profile_image_path', 'dark_mode', 'lang',
+        'image_path',
     ];
 
     public static function run($data) {
         $data = self::filterFields($data);
         $data = self::filterMetaFields($data);
-
-        //update email
-        if ( isset($data['email']) && $data['email'] != \Auth::user()->email ) {
-            $exists = ClassName::Model('User')::where('email', $data['email'])->exists();
-            if ( $exists ) {
-                return 'An user with this email already exists.';
-            }
-        }
-
-        //update password
-        if ( isset($data['password']) ) {
-            $data['password'] = \Hash::make($data['password']);
-            unset($data['current_password']);
-        }
 
         return $data;
     }

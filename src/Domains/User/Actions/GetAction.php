@@ -8,11 +8,6 @@ class GetAction extends Action
 {
     public function run() {
         $item = \Auth::user();
-
-        if ( !$item ) {
-            return Response::error('User not logged.');
-        }
-
         return Response::success(compact('item'));
     }
 }
