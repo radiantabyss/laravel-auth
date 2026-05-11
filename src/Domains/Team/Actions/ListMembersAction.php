@@ -3,7 +3,6 @@ namespace RA\Auth\Domains\Team\Actions;
 
 use Illuminate\Routing\Controller as Action;
 use RA\Response;
-use RA\Filter;
 use RA\Auth\Services\ClassName;
 
 class ListMembersAction extends Action
@@ -13,10 +12,6 @@ class ListMembersAction extends Action
         $query = ClassName::Model('TeamMember')::select('id', 'user_id', 'role', 'created_at')
             ->with('user:id,email,name')
             ->where('team_id', $team_id);
-
-        //apply filters
-        $filters = \Request::all();
-        Filter::apply($query, $filters);
 
         //paginate
         $per_page = \Request::get('per_page') ?: config('settings.data_table_per_page');
