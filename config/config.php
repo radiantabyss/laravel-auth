@@ -3,7 +3,7 @@ return [
     'send_welcome_mail' => true,
     'activation_required' => false,
     'use_teams' => true,
-    'allowed_team_roles' => ['member'],
+    'team_roles' => ['admin', 'member'],
     'country_guesser_installed' => false,
 
     'mail_subjects' => [

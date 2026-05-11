@@ -8,7 +8,7 @@ class DeleteMemberValidator
             return 'Team Member not found.';
         }
 
-        if ( !in_array($item->role, config('ra-auth.allowed_team_roles')) ) {
+        if ( !in_array($item->role, config('ra-auth.team_roles')) ) {
             return 'This member can\'t be deleted.';
         }
 
