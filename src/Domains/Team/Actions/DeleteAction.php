@@ -4,6 +4,7 @@ namespace RA\Auth\Domains\Team\Actions;
 use Illuminate\Routing\Controller as Action;
 use RA\Response;
 use RA\Auth\Services\ClassName;
+use RA\Auth\Events\TeamDeleted;
 
 class DeleteAction extends Action
 {
@@ -21,6 +22,9 @@ class DeleteAction extends Action
         ClassName::Model('TeamMember')::where('team_id', $team_id)->delete();
 
         $item->delete();
+
+        //let the app clean up after a deleted team (queue via a ShouldQueue listener if needed)
+        event(new TeamDeleted($item));
 
         //switch team if is current team
         $response = $this->handleCurrentTeam($team_id);
@@ -42,7 +46,8 @@ class DeleteAction extends Action
         else {
             //create default team
             $team = ClassName::Model('Team')::create([
-                'user_id' => \Auth::user()->id,
+                'uuid' => \Str::uuid(),
+                'created_by' => \Auth::user()->id,
                 'name' => 'My Team',
             ]);
 

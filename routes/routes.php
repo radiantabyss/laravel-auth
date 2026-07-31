@@ -16,6 +16,7 @@ Route::group(['middleware' => ['RA\Auth\NotLogged']], function() {
 Route::group(['middleware' => ['RA\Auth\Logged']], function() {
     Route::get('/auth/user/get', 'User\GetAction');
     Route::post('/auth/user/patch', 'User\PatchAction');
+    Route::get('/auth/user/delete', 'User\DeleteAction');
     Route::post('/auth/user/upload-profile-image', 'User\UploadProfileImageAction');
     Route::options('/auth/user/upload-profile-image', 'User\UploadProfileImageAction');
 

@@ -39,7 +39,8 @@ class LeaveAction extends Action
         else {
             //create default team
             $team = ClassName::Model('Team')::create([
-                'user_id' => \Auth::user()->id,
+                'uuid' => \Str::uuid(),
+                'created_by' => \Auth::user()->id,
                 'name' => 'My Team',
             ]);
 
